@@ -5,3 +5,7 @@ html {
 	background: black;
 	overflow: hidden;
 }
+
+canvas {
+	image-rendering: pixelated;
+}
