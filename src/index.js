@@ -49,16 +49,31 @@ function create() {
 	this.frame = this.add.image(config.scale.width/2, config.scale.height/2, "frame");
 	this.sword = this.add.image(300, 100, "sword");
 
+	var texture = this.textures.createCanvas('gradient', config.scale.width * 2, config.scale.height);
+	var context = texture.getContext();
+	var grd = context.createLinearGradient(0, 0, config.scale.width * 2, 0);
+
+	grd.addColorStop(0, 'rgb(0,0,0)');
+	grd.addColorStop(0.5, 'rgb(0,0,0)');
+	grd.addColorStop(1, 'rgba(0,0,0,0)');
+
+	context.fillStyle = grd;
+	context.fillRect(0, 0, texture.width, texture.height);
+
+	texture.refresh();
+	this.gradient = this.add.image(0, 0, 'gradient');
+	this.gradient.setOrigin(0);
 
 	this.tweens.add({
-		targets: sword,
-		y: 200,
-		duration: 2000,
+		targets: this.gradient,
+		x: -texture.width,
+		duration: 4000,
 		ease: "Power2",
-		yoyo: true,
-		loop: -1
+		onComplete: () => {
+			this.gradient.destroy();
+		},
 	});
-	
+
 
 
 	this.eventText.setText(`Lorem ipsum dolor sit amet, consectetur adipiscing elit.
