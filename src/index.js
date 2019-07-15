@@ -46,7 +46,7 @@ function create() {
 
 
 	this.eventText = new EventText(this);
-	this.frame = this.add.image(config.scale.width/2, config.scale.height/2, "frame");
+	this.frame = this.add.image(config.scale.width / 2, config.scale.height / 2, "frame");
 	this.sword = this.add.image(300, 100, "sword");
 
 	var texture = this.textures.createCanvas('gradient', config.scale.width * 2, config.scale.height);

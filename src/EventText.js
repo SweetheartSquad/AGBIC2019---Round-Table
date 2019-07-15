@@ -23,7 +23,7 @@ function wrap(str, max) {
 	var words = str.split(' ');
 	var s = '';
 	var rows = [];
-	for(var i = 0; i < words.length; ++i) {
+	for (var i = 0; i < words.length; ++i) {
 		if (s.length + words[i].length > max) {
 			rows.push(s);
 			s = '';
@@ -38,7 +38,7 @@ function characterCallback(data) {
 	const duration = 800;
 	const offset = 0.08;
 	const t = 1.0 - Math.min(1, Math.max(0, (Date.now() - (data.parent.start + data.index * offset * duration)) / duration));
-	data.rotation = -t*t * 0.8;
+	data.rotation = -t * t * 0.8;
 	data.y += t * data.parent.fontData.size;
 	data.tint.topLeft = data.tint.topRight = data.tint.bottomLeft = data.tint.bottomRight = (cols[Math.floor(t * (cols.length - 1))]);
 	return data;
