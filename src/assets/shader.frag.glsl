@@ -39,10 +39,10 @@ void main(void) {
 	vec3 col = texture2D(uMainSampler, outTexCoord).rgb;
 
 	float brightness = max(col.g, col.r);
-	vec2 rnoise = suv*resolution.x*0.25 + vec2(time*0.01)*(1.0-col.b);
+	vec2 rnoise = suv*resolution.x*0.25 + vec2(time*0.0006)*(1.0-col.b);
 	float r = step(noise(rnoise)*.5+.5, col.r - col.g);
 	// force black/white
-	vec2 bwnoise = suv.yx*resolution.x*0.25 + vec2(time*0.01)*(1.0-col.b);
+	vec2 bwnoise = suv.yx*resolution.x*0.25 + vec2(time*0.0006)*(1.0-col.b);
 	vec3 bw = vec3(step(noise(bwnoise)*.5+.5, brightness));
 	// pick between red and black/white
 	col = mix(bw, vec3(1.0, 0.0, 0.0), r);

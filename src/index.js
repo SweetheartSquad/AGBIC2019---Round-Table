@@ -40,7 +40,6 @@ function create() {
 	this.shader = this.game.renderer.addPipeline('Shader', new Shader(this.game));
 	this.shader.setFloat2('resolution', config.scale.width, config.scale.height);
 	this.cameras.main.setRenderToTexture(this.shader);
-	this.t = 0;
 
 	this.fish = this.add.image(269, 27, "fish");
 	this.fish.setOrigin(0);
@@ -76,8 +75,8 @@ Nulla.`);
 	}, this);
 }
 
-function update() {
-	this.shader.setFloat1('time', ++this.t);
+function update(time, delta) {
+	this.shader.setFloat1('time', time);
 	this.sword.x = this.x;
 	this.sword.y = this.y;
 }
