@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import swordImg from "./assets/sword.png";
 import fishImg from "./assets/fish.png";
+import fontImg from "./assets/font/font.png";
+import fontXml from "!!file-loader!./assets/font/font.fnt";
 import './style.css';
 
 import Shader from './Shader';
@@ -24,6 +26,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
+	this.load.bitmapFont('font', fontImg, fontXml);
 	this.load.image("sword", swordImg);
 	this.load.image("fish", fishImg);
 }
