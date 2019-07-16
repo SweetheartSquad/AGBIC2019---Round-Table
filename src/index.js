@@ -1,7 +1,13 @@
 import Phaser from "phaser";
+
 import frameImg from "./assets/frame.png";
 import swordImg from "./assets/sword.png";
 import fishImg from "./assets/fish.png";
+import portrait1Img from "./assets/portrait1.png";
+import portrait2Img from "./assets/portrait2.png";
+import portrait3Img from "./assets/portrait3.png";
+import battleImg from "./assets/battle.png";
+
 import fontImg from "./assets/font/font.png";
 import fontXml from "!!file-loader!./assets/font/font.fnt";
 import './style.css';
@@ -33,6 +39,10 @@ function preload() {
 	this.load.image("frame", frameImg);
 	this.load.image("sword", swordImg);
 	this.load.image("fish", fishImg);
+	this.load.image("portrait1", portrait1Img);
+	this.load.image("portrait2", portrait2Img);
+	this.load.image("portrait3", portrait3Img);
+	this.load.image("battle", battleImg);
 }
 
 function create() {
@@ -42,6 +52,7 @@ function create() {
 	this.cameras.main.setRenderToTexture(this.shader);
 
 	this.fish = this.add.image(269, 27, "fish");
+	this.fish = this.add.image(269, 27, "battle");
 	this.fish.setOrigin(0);
 
 
