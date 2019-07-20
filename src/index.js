@@ -32,6 +32,7 @@ const config = {
 	}
 };
 
+document.body.textContent = '';
 const game = new Phaser.Game(config);
 
 function preload() {
