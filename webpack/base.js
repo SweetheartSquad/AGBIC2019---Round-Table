@@ -2,6 +2,8 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const package = require("../package.json");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	mode: "development",
@@ -25,7 +27,7 @@ module.exports = {
 			{
 				test: /\.css$/, // stylesheets
 				use: [
-					'style-loader',
+					MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
 						loader: 'postcss-loader',
@@ -48,8 +50,19 @@ module.exports = {
 			CANVAS_RENDERER: JSON.stringify(true),
 			WEBGL_RENDERER: JSON.stringify(true)
 		}),
+		new MiniCssExtractPlugin(),
 		new HtmlWebpackPlugin({
-			template: "./index.html"
+			title: package.description,
+			meta: {
+				viewport: 'width=device-width, initial-scale=1',
+			},
+			favicon: './src/assets/icon.png',
+			minify: true,
+			chunks: {
+				head: {
+					css: './src/assets/style.css',
+				},
+			},
 		})
 	]
 };
