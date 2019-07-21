@@ -6,6 +6,8 @@ import fishImg from "./assets/fish.png";
 import portrait1Img from "./assets/portrait1.png";
 import portrait2Img from "./assets/portrait2.png";
 import portrait3Img from "./assets/portrait3.png";
+import heartImg from "./assets/SweetHeart Squad - icon.png";
+import settingsImg from "./assets/settings.png";
 
 import fontImg from "./assets/font/font.png";
 import fontXml from "!!file-loader!./assets/font/font.fnt";
@@ -48,6 +50,8 @@ export default class LoadingScene extends Phaser.Scene {
 		this.load.image("portrait1", portrait1Img);
 		this.load.image("portrait2", portrait2Img);
 		this.load.image("portrait3", portrait3Img);
+		this.load.image("heart", heartImg);
+		this.load.image("settings", settingsImg);
 		this.load.on('progress', updateProgressbar);
 		this.load.once('complete', () => {
 			import('./GameScene').then(scene => {

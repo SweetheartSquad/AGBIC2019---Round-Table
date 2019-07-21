@@ -1,24 +1,82 @@
+import Phaser from 'phaser';
+import Strand from 'strand-core';
 
 import Shader from './Shader';
 import EventText from "./EventText";
+
+import source from './assets/story';
+import Choice from './Choice';
+
+export class Settings {
+	static speed = 1;
+};
+
+const initialFlags = {};
+const initialStats = {};
+
+let flags = { ...initialFlags };
+let stats = { ...initialStats };
+
+class StrandE extends Strand {
+	constructor(options) {
+		super(options);
+		this.scene = options.scene;
+	}
+
+	speed(delta) {
+		if (delta) {
+			Settings.speed += delta;
+		}
+		return Settings.speed;
+	}
+
+	get stat() {
+		return stats;
+	}
+
+	get plus() {
+		return plus;
+	}
+
+	flag(flag, value) {
+		if (value !== undefined) {
+			flags[flag] = value;
+		} else {
+			return flags[flag];
+		}
+	}
+
+	reset() {
+		flags = { ...initialFlags };
+		stats = { ...initialStats };
+	}
+
+	image(img) {
+		this.scene.portrait.setTexture(img);
+	}
+}
+
 
 export default class GameScene extends Phaser.Scene {
 	constructor() {
 		super({ key: 'game' });
 	}
 	create() {
+		// HACK: there seems to a be a bug where button hit areas aren't respected
+		// until the game has been resized; this fixes it
+		game.scale.refresh();
+
 		// setup post-processing
 		this.shader = this.game.renderer.addPipeline('Shader', new Shader(this.game));
 		this.shader.setFloat2('resolution', this.scale.width, this.scale.height);
 		this.cameras.main.setRenderToTexture(this.shader);
 
-		this.fish = this.add.image(269, 27, "scene1");
-		this.fish.setOrigin(0);
-
+		this.portrait = this.add.image(269 + 104 / 2, 27 + 170 /2, "scene1");
+		this.choicesContainer = new Phaser.GameObjects.Container(this, 35, 155);
+		this.add.existing(this.choicesContainer);
 
 		this.eventText = new EventText(this);
 		this.frame = this.add.image(this.scale.width / 2, this.scale.height / 2, "frame");
-		// this.sword = this.add.image(300, 100, "sword");
 
 		var texture = this.textures.createCanvas('gradient', this.scale.width * 2, this.scale.height);
 		var context = texture.getContext();
@@ -45,28 +103,54 @@ export default class GameScene extends Phaser.Scene {
 			},
 		});
 
+		let canSkip = false;
+		const skip = () => {
+			if (canSkip) {
+				this.eventText.finish();
+				canSkip = false;
+			}
+		};
+		this.input.on('pointerup', skip);
+		const choices = [];
+		const renderer = {
+			displayPassage: async passage => {
+				choices.forEach(choice => choice.destroy());
+				choices.length = 0;
+				const compiledPassage = strand.execute(passage.program);
+				const text = compiledPassage
+					.filter(({ name }) => name === 'text')
+					.map(({ value }) => value).join('').trim();
+				const options = compiledPassage.filter(({ name }) => name === 'action');
+				canSkip = true;
+				await this.eventText.setText(text);
+				canSkip = false;
+				let yOffset = 0;
+				choices.push(...options.map(({ value: { text, action } }, idx) => {
+					var c = new Choice(this, `${idx + 1}.${text}`);
+					this.choicesContainer.add(c);
+					c.setPosition(0, yOffset);
+					yOffset += c.height;
+					c.on('click', () => {
+						strand.eval(action);
+					});
+					return c;
+				}));
+			},
+		};
 
-		this.eventText.setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus purus a ultrices vulputate. Mauris pharetra accumsan dui, nec laoreet tellus porta sed.\n\nNunc pharetra sed sem in scelerisque.');
-		// 	this.eventText.setText(`The Good Queen has passed, as all must. The burden to rule falls now The Naïve Heir, and their table of knights.
-
-		// That is, to You, and your advisors.`);
-		//  Input events
-		// this.x = 0;
-		// this.y = 0;
-		// this.input.on('pointermove', function(pointer) {
-		// 	this.x = pointer.x;
-		// 	this.y = pointer.y;
-		// }, this);
+		const strand = new StrandE({
+			scene: this,
+			renderer,
+			source: source
+				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus.salt()>>')
+				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus.wine()>>')
+				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus.bread()>>'),
+		});
+		strand.goto('start');
 
 		var keyObj = this.input.keyboard.addKey('S'); // Get key object
 		keyObj.on('down', (event) => {
 			this.cameras.main.renderToTexture = !this.cameras.main.renderToTexture;
-			// if (this.cameras.main.renderToTexture) {
-			// 	this.cameras.main.setRenderToTexture();
-			// } else {
-			// 	this.cameras.main.setRenderToTexture(this.shader);
-			// }
-
 		});
 		var scene = 0;
 		var scenes = [
@@ -78,7 +162,7 @@ export default class GameScene extends Phaser.Scene {
 		keyObj.on('down', (event) => {
 			scene += 1;
 			scene %= scenes.length;
-			this.fish.setTexture(scenes[scene]);
+			this.portrait.setTexture(scenes[scene]);
 		});
 		var keyObj = this.input.keyboard.addKey('A'); // Get key object
 		keyObj.on('down', (event) => {
@@ -86,7 +170,7 @@ export default class GameScene extends Phaser.Scene {
 			if (scene < 0) {
 				scene += scenes.length;
 			}
-			this.fish.setTexture(scenes[scene]);
+			this.portrait.setTexture(scenes[scene]);
 		});
 	}
 	update(time, delta) {

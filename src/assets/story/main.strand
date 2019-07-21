@@ -1,0 +1,39 @@
+::start
+<<do this.reset();>>
+<<do this.image('scene4')>>
+<<do this.scene.eventText.setFontSize(20)>>
+<<print "\u0000">>
+ROUND TABLE
+
+[[New game|this.goto('new-game')]]
+[[Options]]
+[[About]]
+
+::Options
+<<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
+<<do this.image('settings')>>
+Text speed: <<print ['slow','normal','fast','instant'][this.speed()]>>
+
+This text will refresh when the settings change to demonstrate the new speed.
+
+<<if this.speed() < 3>>[[Increase text speed|this.speed(+1);this.goto('Options')]]<<endif>>
+<<if this.speed() > 0>>[[Decrease text speed|this.speed(-1);this.goto('Options')]]<<endif>>
+[[Back|this.goto('start')]]
+
+::About
+<<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
+<<do this.image('heart')>>
+Made by Sean & Michael from SweetHeart Squad for A Game By It's Cover 2019.
+
+Based on Famicase artwork by Matt Kump.
+
+[[Original Famicase|window.open('https://famicase.com/19/softs/024.html', '_blank')]] 
+[[AGBIC2019 entries|window.open('https://itch.io/jam/a-game-by-its-cover-2019/entries', '_blank')]]
+[[SweetHeart Squad games|window.open('https://sweetheartsquad.itch.io/', '_blank')]]
+[[Back|this.back()]]
+
+::new-game
+<<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
+todo: make game
+
+[[Back|this.back()]]

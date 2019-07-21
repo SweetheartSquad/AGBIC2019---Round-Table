@@ -17,7 +17,7 @@ module.exports = {
 				}
 			},
 			{
-				test: [/\.vert$/, /\.frag$/],
+				test: [/\.strand$/, /\.vert$/, /\.frag$/],
 				use: "raw-loader"
 			},
 			{
