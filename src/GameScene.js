@@ -52,7 +52,31 @@ class StrandE extends Strand {
 	}
 
 	image(img) {
-		this.scene.portrait.setTexture(img);
+		if (this.scene.activePortrait.texture.key === img) {
+			return;
+		}
+
+		if (this.tweens) {
+			this.tweens.forEach(t => t.stop());
+		}
+		
+		const inactivePortrait = this.scene.inactivePortrait === this.scene.portraitA ? this.scene.portraitB : this.scene.portraitA;
+		inactivePortrait.alpha = 0;
+		const a = this.scene.add.tween({
+			targets: inactivePortrait,
+			alpha: 1,
+			duration: 500,
+			ease: "Power2",
+		});
+		const b = this.scene.add.tween({
+			targets: this.activePortrait,
+			alpha: 0,
+			duration: 500,
+			ease: "Power2",
+		});
+		this.tweens = [a,b];
+		this.scene.activePortrait = inactivePortrait;
+		this.scene.activePortrait.setTexture(img);
 	}
 }
 
@@ -71,7 +95,11 @@ export default class GameScene extends Phaser.Scene {
 		this.shader.setFloat2('resolution', this.scale.width, this.scale.height);
 		this.cameras.main.setRenderToTexture(this.shader);
 
-		this.portrait = this.add.image(269 + 104 / 2, 27 + 170 / 2, "scene1");
+		this.portraitA = this.add.image(269 + 104 / 2, 27 + 170 / 2, "");
+		this.portraitB = this.add.image(269 + 104 / 2, 27 + 170 / 2, "");
+		this.portraitA.alpha = 0;
+		this.portraitB.alpha = 0;
+		this.activePortrait = this.portraitA;
 		this.choicesContainer = new Phaser.GameObjects.Container(this, 35, 155);
 		this.add.existing(this.choicesContainer);
 
@@ -170,7 +198,7 @@ export default class GameScene extends Phaser.Scene {
 		keyObj.on('down', (event) => {
 			scene += 1;
 			scene %= scenes.length;
-			this.portrait.setTexture(scenes[scene]);
+			this.activePortrait.setTexture(scenes[scene]);
 		});
 		var keyObj = this.input.keyboard.addKey('A'); // Get key object
 		keyObj.on('down', (event) => {
@@ -178,7 +206,7 @@ export default class GameScene extends Phaser.Scene {
 			if (scene < 0) {
 				scene += scenes.length;
 			}
-			this.portrait.setTexture(scenes[scene]);
+			this.activePortrait.setTexture(scenes[scene]);
 		});
 	}
 	update(time, delta) {
