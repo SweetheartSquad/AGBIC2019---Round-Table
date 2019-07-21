@@ -35,6 +35,22 @@ Based on Famicase artwork by Matt Kump.
 
 ::new-game
 <<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
-todo: make game
+The Good Queen has passed, as all must. The burden to rule falls now to The Naïve Heir, and their table of knights.
+
+To You, and your advisors.
+
+[[Continue]]
+[[Back|this.back()]]
+
+::Continue
+testing stat changes [+SALT][+WINE][+WINE]
+
+<<if this.stat['salt'] >= 4>>
+you have at least four salt
+<<elseif this.stat['salt'] >= 2>>
+you have at least two but less than four salt
+<<else>>
+default state
+<<endif>>
 
 [[Back|this.back()]]

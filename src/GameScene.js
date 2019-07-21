@@ -6,13 +6,18 @@ import EventText from "./EventText";
 
 import source from './assets/story';
 import Choice from './Choice';
+import Stat from './Stat';
 
 export class Settings {
 	static speed = 1;
 };
 
 const initialFlags = {};
-const initialStats = {};
+const initialStats = {
+	salt: 0,
+	wine: 1,
+	bread: 2,
+};
 
 let flags = { ...initialFlags };
 let stats = { ...initialStats };
@@ -21,6 +26,9 @@ class StrandE extends Strand {
 	constructor(options) {
 		super(options);
 		this.scene = options.scene;
+		Object.entries(stats).forEach(([key, value]) => {
+			this.scene[key].setCount(value);
+		});
 	}
 
 	speed(delta) {
@@ -34,8 +42,10 @@ class StrandE extends Strand {
 		return stats;
 	}
 
-	get plus() {
-		return plus;
+	plus(stat, delta = 1) {
+		stats[stat] += delta;
+		this.scene[stat].setCount(stats[stat]);
+		return stats[stat];
 	}
 
 	flag(flag, value) {
@@ -105,6 +115,14 @@ export default class GameScene extends Phaser.Scene {
 
 		this.eventText = new EventText(this);
 		this.frame = this.add.image(this.scale.width / 2, this.scale.height / 2, "frame");
+
+		this.salt = new Stat(this, 'salt');
+		this.wine = new Stat(this, 'wine');
+		this.bread = new Stat(this, 'bread');
+		this.salt.y = this.wine.y = this.bread.y = 138;
+		this.salt.x = 35;
+		this.wine.x = 35 + 30;
+		this.bread.x = 35 + 30 + 30;
 
 		var texture = this.textures.createCanvas('gradient', this.scale.width * 2, this.scale.height);
 		var context = texture.getContext();
@@ -194,9 +212,9 @@ export default class GameScene extends Phaser.Scene {
 			scene: this,
 			renderer,
 			source: source
-				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus.salt()>>')
-				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus.wine()>>')
-				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus.bread()>>'),
+				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus("salt")>>')
+				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus("wine")>>')
+				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>'),
 		});
 		strand.goto('start');
 
