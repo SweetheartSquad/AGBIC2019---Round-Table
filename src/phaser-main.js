@@ -12,6 +12,7 @@ const config = {
 		width: 400,
 		height: 225,
 	},
+	autoRound: true,
 	roundPixels: true,
 	scene: LoadingScene,
 };
