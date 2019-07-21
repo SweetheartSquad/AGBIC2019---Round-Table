@@ -17,11 +17,7 @@ module.exports = {
 				}
 			},
 			{
-				test: [/\.strand$/, /\.vert$/, /\.frag$/],
-				use: "raw-loader"
-			},
-			{
-				test: /\.(gif|png|jpe?g|svg|xml)$/i,
+				test: /\.(vert|frag|gif|png|jpe?g|svg|xml)$/i,
 				use: "file-loader"
 			},
 			{
