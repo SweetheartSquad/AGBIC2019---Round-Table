@@ -59,7 +59,7 @@ class StrandE extends Strand {
 		if (this.tweens) {
 			this.tweens.forEach(t => t.stop());
 		}
-		
+
 		const inactivePortrait = this.scene.inactivePortrait === this.scene.portraitA ? this.scene.portraitB : this.scene.portraitA;
 		inactivePortrait.alpha = 0;
 		const a = this.scene.add.tween({
@@ -74,7 +74,7 @@ class StrandE extends Strand {
 			duration: 500,
 			ease: "Power2",
 		});
-		this.tweens = [a,b];
+		this.tweens = [a, b];
 		this.scene.activePortrait = inactivePortrait;
 		this.scene.activePortrait.setTexture(img);
 	}
@@ -139,6 +139,22 @@ export default class GameScene extends Phaser.Scene {
 			}
 		};
 		this.input.on('pointerup', skip);
+		this.input.keyboard.addKey('SPACE').on('down', skip);
+		this.input.keyboard.addKey('ENTER').on('down', skip);
+		var keyObj = this.input.keyboard.on('keydown', event => {
+			if (choices[event.key - 1]) {
+				choices[event.key - 1].emit('click');
+			} else if (parseInt(event.key, 10) <= 4) {
+				skip();
+			}
+		});
+		keyObj.on('down', (event) => {
+			scene -= 1;
+			if (scene < 0) {
+				scene += scenes.length;
+			}
+			this.activePortrait.setTexture(scenes[scene]);
+		});
 		const choices = [];
 		const renderer = {
 			displayPassage: async passage => {
