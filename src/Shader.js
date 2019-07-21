@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import fragShader from '!!raw-loader!./assets/shader.frag.glsl';
 
 var Shader = new Phaser.Class({
