@@ -1,11 +1,10 @@
 import Phaser from "phaser";
-import { wrap, characterCallback } from "./utils";
+import { wrap } from "./utils";
 
 export default class Choice extends Phaser.GameObjects.DynamicBitmapText {
 	constructor(scene, text) {
 		super(scene, 0, 0, 'font', '', undefined, 0);
 		this.start = Date.now();
-		this.setDisplayCallback(characterCallback);
 		let down = false;
 		const cNormal = 0xFFFFFF;
 		const cOver = 0xBBBBFF;
@@ -18,7 +17,7 @@ export default class Choice extends Phaser.GameObjects.DynamicBitmapText {
 			this.tint = down ? cActive : cOver;
 		});
 		this.on('pointerout', () => {
-			this.tint = cNormal;
+			this.tint = undefined;
 		});
 		this.on('pointerdown', () => {
 			down = true;

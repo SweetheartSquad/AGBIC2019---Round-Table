@@ -71,7 +71,7 @@ export default class GameScene extends Phaser.Scene {
 		this.shader.setFloat2('resolution', this.scale.width, this.scale.height);
 		this.cameras.main.setRenderToTexture(this.shader);
 
-		this.portrait = this.add.image(269 + 104 / 2, 27 + 170 /2, "scene1");
+		this.portrait = this.add.image(269 + 104 / 2, 27 + 170 / 2, "scene1");
 		this.choicesContainer = new Phaser.GameObjects.Container(this, 35, 155);
 		this.add.existing(this.choicesContainer);
 
@@ -133,6 +133,14 @@ export default class GameScene extends Phaser.Scene {
 					c.on('click', () => {
 						strand.eval(action);
 					});
+					c.alpha = 0;
+					this.add.tween({
+						targets: c,
+						alpha: 1,
+						delay: idx * (3 - Settings.speed) * 50,
+						duration: (3 - Settings.speed) * 500,
+						ease: "Power2",
+					})
 					return c;
 				}));
 			},

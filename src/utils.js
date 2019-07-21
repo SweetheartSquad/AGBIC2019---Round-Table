@@ -1,4 +1,3 @@
-
 import { Settings } from "./GameScene";
 
 const cols = [
