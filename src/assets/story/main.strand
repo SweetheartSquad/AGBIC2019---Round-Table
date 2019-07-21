@@ -23,7 +23,7 @@ This text will refresh when the settings change to demonstrate the new speed.
 ::About
 <<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
 <<do this.image('heart')>>
-Made by Sean & Michael from SweetHeart Squad for A Game By It's Cover 2019.
+Made by Sean & Michael from SweetHeart Squad for A Game By Its Cover 2019.
 
 Based on Famicase artwork by Matt Kump.
 
