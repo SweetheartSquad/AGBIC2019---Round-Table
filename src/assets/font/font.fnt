@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <font>
   <info size="8"/>
-  <common lineHeight="8" base="8"/>
+  <common lineHeight="10" base="8"/>
   <chars count="255">
 <char id="0" x="0" y="0" width="8" height="8" xoffset="0" yoffset="0" xadvance="8" />
 <char id="1" x="8" y="0" width="8" height="8" xoffset="0" yoffset="0" xadvance="8" />
