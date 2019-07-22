@@ -4,7 +4,6 @@ import Strand from 'strand-core';
 import Shader from './Shader';
 import EventText from "./EventText";
 
-import source from './assets/story';
 import Choice from './Choice';
 import Stat from './Stat';
 
@@ -211,7 +210,7 @@ export default class GameScene extends Phaser.Scene {
 		const strand = new StrandE({
 			scene: this,
 			renderer,
-			source: source
+			source: this.cache.text.get('story')
 				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus("salt")>>')
 				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus("wine")>>')
 				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>'),

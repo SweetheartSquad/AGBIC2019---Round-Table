@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import story from './assets/story';
+import fragShader from './assets/shader.frag.glsl';
 import frameImg from "./assets/frame.png";
 import swordImg from "./assets/sword.png";
 import fishImg from "./assets/fish.png";
@@ -58,6 +60,8 @@ export default class LoadingScene extends Phaser.Scene {
 		this.load.image("salt", saltImg);
 		this.load.image("wine", wineImg);
 		this.load.image("bread", breadImg);
+		this.load.text('story', story);
+		this.load.text('fragShader', fragShader);
 
 		this.load.on('progress', updateProgressbar);
 		this.load.once('complete', () => {

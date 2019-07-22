@@ -1,5 +1,3 @@
-import main from '!!raw-loader!./main.strand';
+import main from './main.strand';
 
-export default [
-	main,
-].join('\n');
+export default main;
