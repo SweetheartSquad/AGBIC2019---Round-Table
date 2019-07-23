@@ -1,21 +1,12 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 import story from './assets/story';
 import fragShader from './assets/shader.frag.glsl';
-import frameImg from "./assets/frame.png";
-import swordImg from "./assets/sword.png";
-import fishImg from "./assets/fish.png";
-import portrait1Img from "./assets/portrait1.png";
-import portrait2Img from "./assets/portrait2.png";
-import portrait3Img from "./assets/portrait3.png";
-import heartImg from "./assets/SweetHeart Squad - icon.png";
-import settingsImg from "./assets/settings.png";
-import saltImg from "./assets/salt.png";
-import wineImg from "./assets/wine.png";
-import breadImg from "./assets/bread.png";
 
-import fontImg from "./assets/font/font.png";
-import fontXml from "!!file-loader!./assets/font/font.fnt";
+import fontImg from './assets/font/font.png';
+import fontXml from '!!file-loader!./assets/font/font.fnt';
+
+import * as images from './assets/images';
 
 export default class LoadingScene extends Phaser.Scene {
 	constructor() {
@@ -49,19 +40,9 @@ export default class LoadingScene extends Phaser.Scene {
 		};
 
 		this.load.bitmapFont('font', fontImg, fontXml);
-		this.load.image("frame", frameImg);
-		this.load.image("sword", swordImg);
-		this.load.image("fish", fishImg);
-		this.load.image("portrait1", portrait1Img);
-		this.load.image("portrait2", portrait2Img);
-		this.load.image("portrait3", portrait3Img);
-		this.load.image("heart", heartImg);
-		this.load.image("settings", settingsImg);
-		this.load.image("salt", saltImg);
-		this.load.image("wine", wineImg);
-		this.load.image("bread", breadImg);
 		this.load.text('story', story);
 		this.load.text('fragShader', fragShader);
+		Object.entries(images).forEach(([key, value]) => this.load.image(key, value));
 
 		this.load.on('progress', updateProgressbar);
 		this.load.once('complete', () => {

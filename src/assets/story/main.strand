@@ -1,6 +1,6 @@
 ::start
 <<do this.reset();>>
-<<do this.image('scene4')>>
+<<do this.image('sword')>>
 <<do this.scene.eventText.setFontSize(20)>>
 <<print "\u0000">>
 ROUND TABLE

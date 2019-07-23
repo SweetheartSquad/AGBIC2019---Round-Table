@@ -7,6 +7,8 @@ import EventText from "./EventText";
 import Choice from './Choice';
 import Stat from './Stat';
 
+import * as images from './assets/images';
+
 export class Settings {
 	static speed = 1;
 };
@@ -222,11 +224,7 @@ export default class GameScene extends Phaser.Scene {
 			this.cameras.main.renderToTexture = !this.cameras.main.renderToTexture;
 		});
 		var scene = 0;
-		var scenes = [
-			'portrait1',
-			'portrait2',
-			'portrait3',
-		];
+		var scenes = Object.keys(images);
 		var keyObj = this.input.keyboard.addKey('D'); // Get key object
 		keyObj.on('down', (event) => {
 			scene += 1;
