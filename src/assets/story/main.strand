@@ -40,6 +40,7 @@ The Good Queen has passed, as all must. The burden to rule falls now to The Naï
 To You, and your advisors.
 
 [[Continue]]
+[[br test]]
 [[Back|this.back()]]
 
 ::Continue
@@ -54,3 +55,20 @@ default state
 <<endif>>
 
 [[Back|this.back()]]
+
+
+::br test
+1
+2
+3
+<<BR>>
+4
+5
+6
+7
+<<BR>>
+8
+9
+10
+
+[[start]]

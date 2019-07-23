@@ -213,6 +213,9 @@ export default class GameScene extends Phaser.Scene {
 			scene: this,
 			renderer,
 			source: this.cache.text.get('story')
+				.replace(/<<BR>>/ig, function(_, pos) {
+					return `[[Continue|this.goto('break:${pos}')]]\n::break:${pos}`;
+				})
 				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus("salt")>>')
 				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus("wine")>>')
 				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>'),
