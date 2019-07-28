@@ -71,21 +71,22 @@ class StrandE extends Strand {
 			this.tweens.forEach(t => t.stop());
 		}
 
-		const inactivePortrait = this.scene.inactivePortrait === this.scene.portraitA ? this.scene.portraitB : this.scene.portraitA;
+		const inactivePortrait = this.scene.inactivePortrait === this.scene.portraitA ? this.scene.portraitA : this.scene.portraitB;
 		inactivePortrait.alpha = 0;
 		const a = this.scene.add.tween({
 			targets: inactivePortrait,
 			alpha: 1,
 			duration: 500,
-			ease: "Power2",
+			ease: "Sin.easeOut",
 		});
 		const b = this.scene.add.tween({
-			targets: this.activePortrait,
+			targets: this.scene.activePortrait,
 			alpha: 0,
-			duration: 500,
-			ease: "Power2",
+			duration: 300,
+			ease: "Sin.easeIn",
 		});
 		this.tweens = [a, b];
+		this.scene.inactivePortrait = this.scene.activePortrait;
 		this.scene.activePortrait = inactivePortrait;
 		this.scene.activePortrait.setTexture(img);
 	}
@@ -144,6 +145,7 @@ export default class GameScene extends Phaser.Scene {
 			targets: this.gradient,
 			x: -texture.width,
 			duration: 4000,
+			delay: 500,
 			ease: "Power2",
 			onComplete: () => {
 				this.gradient.destroy();
@@ -222,6 +224,7 @@ export default class GameScene extends Phaser.Scene {
 		});
 		strand.goto('start');
 
+		// debug stuff
 		var keyObj = this.input.keyboard.addKey('S'); // Get key object
 		keyObj.on('down', (event) => {
 			this.cameras.main.renderToTexture = !this.cameras.main.renderToTexture;
@@ -232,7 +235,7 @@ export default class GameScene extends Phaser.Scene {
 		keyObj.on('down', (event) => {
 			scene += 1;
 			scene %= scenes.length;
-			this.activePortrait.setTexture(scenes[scene]);
+			strand.image(scenes[scene]);
 		});
 		var keyObj = this.input.keyboard.addKey('A'); // Get key object
 		keyObj.on('down', (event) => {
@@ -240,7 +243,7 @@ export default class GameScene extends Phaser.Scene {
 			if (scene < 0) {
 				scene += scenes.length;
 			}
-			this.activePortrait.setTexture(scenes[scene]);
+			strand.image(scenes[scene]);
 		});
 	}
 	update(time, delta) {
