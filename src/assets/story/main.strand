@@ -72,3 +72,6 @@ default state
 10
 
 [[start]]
+::exhausted
+// out of random events!
+
