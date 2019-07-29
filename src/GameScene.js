@@ -230,7 +230,10 @@ export default class GameScene extends Phaser.Scene {
 				})
 				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus("salt")>>')
 				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus("wine")>>')
-				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>'),
+				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>')
+				.replace(/\[\-SALT\]/g, '[-SALT]<<do this.plus("salt", -1)>>')
+				.replace(/\[\-WINE\]/g, '[-WINE]<<do this.plus("wine", -1)>>')
+				.replace(/\[\-BREAD\]/g, '[-BREAD]<<do this.plus("bread", -1)>>'),
 		});
 		strand.goto('start');
 
