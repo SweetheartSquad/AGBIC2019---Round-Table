@@ -1,5 +1,16 @@
 ::start
 <<do this.reset();>>
+<<do
+var randomScenes = [
+];
+this.randomScenes = [];
+while(randomScenes.length) {
+	this.randomScenes.push(randomScenes.splice(Math.floor(Math.random()*randomScenes.length), 1)[0]);
+}
+this.setRandom = function() {
+	this.flag('random', this.randomScenes.pop() || 'exhausted');
+};
+>>
 <<do this.image('sword')>>
 <<do this.scene.eventText.setFontSize(20)>>
 <<print "\u0000">>

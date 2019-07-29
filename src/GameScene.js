@@ -60,16 +60,6 @@ class StrandE extends Strand {
 	reset() {
 		flags = { ...initialFlags };
 		stats = { ...initialStats };
-		const randomScenes = [
-		];
-		this.randomScenes = [];
-		while(randomScenes.length) {
-			this.randomScenes.push(randomScenes.splice(Math.floor(Math.random()*randomScenes.length), 1)[0]);
-		}
-	}
-
-	setRandom() {
-		this.flag('random', this.randomScenes.pop() || 'exhausted');
 	}
 
 	image(img) {
