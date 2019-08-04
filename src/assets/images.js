@@ -7,7 +7,7 @@ export { default as bread } from './bread.png';
 export { default as wine } from './wine.png';
 export { default as cousin } from './The Distant Cousin.png';
 export { default as justiciar } from './The Noble Justiciar.png';
-export { default as huntress } from './The Obssessed Huntress.png';
+export { default as huntress } from './The Obsessed Huntress.png';
 export { default as veteran } from './The Seasoned Veteran.png';
 export { default as scholar } from './The Wounded Scholar.png';
 export { default as messenger } from './messenger.png';
