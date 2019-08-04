@@ -5,7 +5,6 @@ import Shader from './Shader';
 import EventText from "./EventText";
 
 import Choice from './Choice';
-import Stat from './Stat';
 
 import * as images from './assets/images';
 
@@ -27,9 +26,6 @@ class StrandE extends Strand {
 	constructor(options) {
 		super(options);
 		this.scene = options.scene;
-		Object.entries(stats).forEach(([key, value]) => {
-			this.scene[key].setCount(value);
-		});
 	}
 
 	speed(delta) {
@@ -45,7 +41,6 @@ class StrandE extends Strand {
 
 	plus(stat, delta = 1) {
 		stats[stat] += delta;
-		this.scene[stat].setCount(stats[stat]);
 		return stats[stat];
 	}
 
@@ -117,14 +112,6 @@ export default class GameScene extends Phaser.Scene {
 
 		this.eventText = new EventText(this);
 		this.frame = this.add.image(this.scale.width / 2, this.scale.height / 2, "frame");
-
-		this.salt = new Stat(this, 'salt');
-		this.wine = new Stat(this, 'wine');
-		this.bread = new Stat(this, 'bread');
-		this.salt.y = this.wine.y = this.bread.y = 138;
-		this.salt.x = 35;
-		this.wine.x = 35 + 30;
-		this.bread.x = 35 + 30 + 30;
 
 		var texture = this.textures.createCanvas('gradient', this.scale.width * 2, this.scale.height);
 		var context = texture.getContext();
@@ -225,6 +212,7 @@ export default class GameScene extends Phaser.Scene {
 				.replace(/\[\-WINE\]/g, '[-WINE]<<do this.plus("wine", -1)>>')
 				.replace(/\[\-BREAD\]/g, '[-BREAD]<<do this.plus("bread", -1)>>'),
 		});
+		window.strand = strand;
 		strand.goto('start');
 
 		// debug stuff
