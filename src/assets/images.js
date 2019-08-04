@@ -23,6 +23,7 @@ export { default as brush } from './brush.png';
 export { default as cloudy } from './cloudy.png';
 export { default as foggy } from './foggy.png';
 export { default as foggy2 } from './foggy2.png';
+export { default as sky } from './sky.png';
 export { default as redSky } from './red sky.png';
 export { default as splat } from './splat.png';
 export { default as droplet } from './droplet.png';
