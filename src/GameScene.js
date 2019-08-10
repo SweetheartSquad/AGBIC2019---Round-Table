@@ -41,6 +41,7 @@ class StrandE extends Strand {
 
 	plus(stat, delta = 1) {
 		stats[stat] += delta;
+		stats[stat] = Math.max(0, stats[stat]);
 		return stats[stat];
 	}
 
