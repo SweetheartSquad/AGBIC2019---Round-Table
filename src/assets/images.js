@@ -12,6 +12,7 @@ export { default as queen } from './The Good Queen.png';
 export { default as apparition } from './The Frightening Apparition.png';
 export { default as apparitionZoom } from './The Frightening Apparition -zoom.png';
 export { default as assassin } from './assassin.png';
+export { default as roundTable } from './round_table.png';
 export { default as map } from './map.png';
 export { default as ball } from './ball.png';
 export { default as hall } from './hall.png';
