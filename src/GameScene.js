@@ -86,6 +86,32 @@ class StrandE extends Strand {
 		this.scene.activePortrait = inactivePortrait;
 		this.scene.activePortrait.setTexture(img);
 	}
+
+	wonk() {
+		if (this.wonkTween) {
+			this.wonkTween.stop();
+		}
+		this.wonkTween = this.scene.add.tween({
+			targets: this.scene.music,
+			detune: -220,
+			duration: 10000,
+			yoyo: true,
+			repeat: Infinity,
+			ease: "Power2",
+		});
+	}
+
+	unwonk() {
+		if (this.wonkTween) {
+			this.wonkTween.stop();
+		}
+		this.wonkTween = this.scene.add.tween({
+			targets: this.scene.music,
+			detune: 0,
+			duration: 10000,
+			ease: "Sin.easeOut",
+		});
+	}
 }
 
 
@@ -97,6 +123,23 @@ export default class GameScene extends Phaser.Scene {
 		// HACK: there seems to a be a bug where button hit areas aren't respected
 		// until the game has been resized; this fixes it
 		game.scale.refresh();
+
+		this.sound.pauseOnBlur = false;
+		this.music = this.sound.add('music', {
+			mute: false,
+			volume: 0,
+			// rate: 1,
+			detune: 0,
+			// seek: 0,
+			loop: true,
+		});
+		this.music.play();
+		this.add.tween({
+			targets: this.music,
+			volume: 1,
+			duration: 5000,
+			ease: "Power2",
+		});
 
 		// setup post-processing
 		this.shader = this.game.renderer.addPipeline('Shader', new Shader(this.game));
