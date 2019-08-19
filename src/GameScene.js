@@ -97,7 +97,7 @@ class StrandE extends Strand {
 			duration: 10000,
 			yoyo: true,
 			repeat: Infinity,
-			ease: "Power2",
+			ease: "Cubic.easeInOut",
 		});
 	}
 
@@ -137,8 +137,8 @@ export default class GameScene extends Phaser.Scene {
 		this.add.tween({
 			targets: this.music,
 			volume: 1,
-			duration: 5000,
-			ease: "Power2",
+			duration: 8000,
+			ease: "Cubic.easeInOut",
 		});
 
 		// setup post-processing
