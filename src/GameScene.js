@@ -112,6 +112,32 @@ class StrandE extends Strand {
 			ease: "Sin.easeOut",
 		});
 	}
+
+	textWonk() {
+		this.tx = this.scene.add.tween({
+			targets: strand.scene.eventText,
+			scaleX: 0.98,
+			duration: 3232,
+			ease: "Back.easeInOut",
+			loop: -1,
+			yoyo: true,
+		});
+		this.ty = this.scene.add.tween({
+			targets: strand.scene.eventText,
+			scaleY: 0.96,
+			duration: 2323,
+			ease: "Back.easeInOut",
+			loop: -1,
+			yoyo: true,
+		});
+	}
+
+	textWonkStop() {
+		this.tx.stop();
+		this.ty.stop();
+		this.scene.eventText.scaleX = 1;
+		this.scene.eventText.scaleY = 1;
+	}
 }
 
 
