@@ -285,34 +285,10 @@ export default class GameScene extends Phaser.Scene {
 				.replace(/\[\-WINE\]/g, '[-WINE]<<do this.plus("wine", -1)>>')
 				.replace(/\[\-BREAD\]/g, '[-BREAD]<<do this.plus("bread", -1)>>'),
 		});
-		window.strand = strand;
 		strand.goto('start');
-
-		// debug stuff
-		var keyObj = this.input.keyboard.addKey('S'); // Get key object
-		keyObj.on('down', (event) => {
-			this.cameras.main.renderToTexture = !this.cameras.main.renderToTexture;
-		});
-		var scene = 0;
-		var scenes = Object.keys(images);
-		var keyObj = this.input.keyboard.addKey('D'); // Get key object
-		keyObj.on('down', (event) => {
-			scene += 1;
-			scene %= scenes.length;
-			strand.image(scenes[scene]);
-		});
-		var keyObj = this.input.keyboard.addKey('A'); // Get key object
-		keyObj.on('down', (event) => {
-			scene -= 1;
-			if (scene < 0) {
-				scene += scenes.length;
-			}
-			strand.image(scenes[scene]);
-		});
 	}
-	update(time, delta) {
+
+	update(time) {
 		this.shader.setFloat1('time', time);
-		// this.sword.x = this.x;
-		// this.sword.y = this.y;
 	}
 }
