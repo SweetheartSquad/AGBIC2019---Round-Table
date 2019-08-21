@@ -1009,7 +1009,7 @@ The meeting of the round table comes to a close.
 <<do this.image('sword')>>
 <<if this.flag('week') == 6>>There is a lull in the middle of the week.
 
-[[Continue|this.goto('the-end')]]]<<else>>
+[[Continue|this.goto('the-end')]]<<else>>
 <<if this.flag('week') == 1>>The next couple days are a flurry of action. Plans are made, a coronation is held, but among it all you manage to spare a day for yourself.<<elseif this.flag('week') == 2>>You had always expected ruling would be exhausting. It seemed as if your mother was constantly busy, but today, you find yourself with the luxury of free time.<<elseif this.flag('week') == 3>>Thankfully your advisors have continued to manage many of the finer details of ruling, and you find yourself with some time throughout the week to spend as you choose.<<else>>As usual, you find yourself with some time throughout the week to spend as you choose.<<endif>>
 
 What do you do?
