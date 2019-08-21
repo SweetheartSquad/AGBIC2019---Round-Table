@@ -1234,10 +1234,18 @@ There are more speeches after the fact, but all you can think about is how seldo
 
 
 ::knife
+<<do this.image('hall')>>
+You struggle to sleep that night, as the heat keeps you up.
+<<BR>>
+<<do this.image('moon')>>
+You are nearly sweating just as you lay there, and decide to open a window and let the breeze in.
+<<BR>>
 <<do this.image('brush')>>
-The night air is cold on your skin. It's a refreshing change from the cramped humidity of your chambers.
+It's a refreshing change from the cramped humidity of your chambers.
 
-You are not walking long before you feel something colder yet press against your skin.
+The night air is cool on your skin, and you turn to walk back to bed.
+<<BR>>
+You are not walking long before you feel something colder still.
 <<BR>>
 <<do this.image('sword')>>
 Metal - sharp - against the skin of your neck.
@@ -1249,15 +1257,16 @@ Metal - sharp - against the skin of your neck.
 <<endif>>
 
 ::knife-pass
+<<do this.image('swordBloody')>>
 "You and your kin deserve this."
 
 The knife presses in enough to draw blood, but it's a shallow cut.
 
 [[A hesitation]]
 ::A hesitation
-You slowly reach for your own blade concealed in your belt.
+You reach to the side. Your writing desk is close by, and on it, a letter opener.
 
-Your hand touches the hilt, and carefully, ever so carefully, begins to withdraw it.
+Your hand touches the hilt, and carefully, ever so carefully, begins to wrap around it.
 
 <<if this.stat.salt < 6>>
 [[Continue|this.goto('knife-fail2')]]
@@ -1266,28 +1275,31 @@ Your hand touches the hilt, and carefully, ever so carefully, begins to withdraw
 <<endif>>
 
 ::knife-pass2
-<<do this.image('swordBloody')>>
+<<do this.image('assassin')>>
 You bring up the blade as quick as you can muster, directly into your assailant's forearm.
 
 They tug once, twisting their wound and dropping their knife from the pain.
 <<BR>>
-A shove sends you sprawling on the ground. By the time you're back on your feet, the would-be assassin has fled into the night, and guards are rushing to your aid.
+<<do this.image('moon')>>
+A shove sends you sprawling on the ground. By the time you're back on your feet, the would-be assassin has fled into the night, and guards are pounding on the door, bursting in.
 <<BR>>
-<<do this.image('brush')>>
-You leave the chase to your guards.
+You leave the chase to them.
 
 Reaching up to feel the blood trickling from your neck, you're thankful to have simply survived the attack.
+[+SALT]
+
 [[Continue|this.goto('week-start')]]
 
 ::knife-fail2
 But not carefully enough.
 
 They notice, and you feel their hesitation evaporate.
+[-SALT]
 
 [[Continue|this.goto('knife-fail')]]
 
 ::knife-fail
-<<do this.image('swordBloody')>>
+<<do this.image('assassin')>>
 You don't feel much of anything after that.
 
 
