@@ -1,16 +1,61 @@
+::setup
+  #####                             
+ #     # ###### ##### #    # #####  
+ #       #        #   #    # #    # 
+  #####  #####    #   #    # #    # 
+       # #        #   #    # #####  
+ #     # #        #   #    # #      
+  #####  ######   #    ####  #      
+
 ::start
 <<do this.reset();>>
 <<do
 var randomScenes = [
+	'apparition',
+	'apparition',
+	'plague',
+	'plague',
+	'window',
+	'seer',
+	'???',
+	'heat',
+	'spill',
+	'beauty',
+	'funeral',
+	'huntress',
+	'huntress',
+	'strike',
+	'sermon',
+	'messenger',
+	'messenger',
 ];
 this.randomScenes = [];
 while(randomScenes.length) {
+	if (this.randomScenes.length == 2) {
+		randomScenes.push('poison');
+		randomScenes.push('knife');
+	}
 	this.randomScenes.push(randomScenes.splice(Math.floor(Math.random()*randomScenes.length), 1)[0]);
 }
-this.setRandom = function() {
-	this.flag('random', this.randomScenes.pop() || 'exhausted');
+this.setRandomScene = function() {
+	this.flag('randomScene', this.randomScenes.pop() || 'exhausted');
+};
+var randomStatements = [
+	'justiciar',
+	'scholar',
+	'veteran',
+	'cousin',
+	'huntress',
+];
+this.randomStatements = [];
+while(randomStatements.length) {
+	this.randomStatements.push(randomStatements.splice(Math.floor(Math.random()*randomStatements.length), 1)[0]);
+}
+this.setRandomStatement = function() {
+	this.flag('randomStatement', this.randomStatements.pop() || 'exhausted');
 };
 >>
+<<do this.flag('week', 1)>>
 <<do this.image('sword')>>
 <<do this.scene.eventText.setFontSize(20)>>
 <<print "\u0000">>
@@ -46,43 +91,2622 @@ Based on Famicase artwork by Matt Kump.
 
 ::new-game
 <<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
+<<do this.image('queen')>>
 The Good Queen has passed, as all must. The burden to rule falls now to The Naïve Heir, and their table of knights.
 
 To You, and your advisors.
+<<BR>>
+It happened so suddenly. "Cut down in her prime", they'll say, looking back on it.
 
-[[Continue]]
-[[br test]]
-[[Back|this.back()]]
+But that's not what they say today.
+<<BR>>
+<<do this.image('blank')>>
+Today, they shout
+"The Queen is dead!"
 
-::Continue
-testing stat changes [+SALT][+WINE][+WINE]
+Today, they chant
+"Long live The Queen!"
+<<BR>>
+<<do this.image('sword')>>
+No sooner than the news has reached your ears, you are ushered off to private chambers.
 
-<<if this.stat['salt'] >= 4>>
-you have at least four salt
-<<elseif this.stat['salt'] >= 2>>
-you have at least two but less than four salt
+An official coronation will be held soon, but the round table does not wait.
+<<BR>>
+<<do this.image('roundTable')>>
+You look around the room, and at the five people seated:
+<<BR>>
+<<do this.image('justiciar')>>
+The Noble Justiciar serves as judge, jury, and if needed, executioner.
+
+The Queen rules by divine right, but he speaks for the church.
+<<BR>>
+<<do this.image('veteran')>>
+The Seasoned Veteran has fought many battles, and will fight many more.
+
+He is not always victorious, but he has never lost.
+<<BR>>
+<<do this.image('scholar')>>
+The Wounded Scholar was The Good Queen's closest advisor.
+
+A lifetime ago he fought on the front lines. He earned his knighthood through less violent means much later.
+<<BR>>
+<<do this.image('cousin')>>
+The Distant Cousin was knighted as a show of good faith between far-flung branches of the family.
+
+They recently travelled a long way from The Northern Isles, and are now next in line by royal blood.
+<<BR>>
+<<do this.image('huntress')>>
+The Obsessed Huntress and your mother were inseparable as children.
+
+Or so you've heard; you're not sure you've ever seen them together.
+<<BR>>
+<<do this.image('blank')>>
+And there is an empty seat at the opposite end of the table.
+
+The Queen's seat.
+
+[[Take your seat]]
+[[Remain standing]]
+
+::Take your seat
+<<do this.image('roundTable')>>
+You walk around the table, passing by The Veteran and The Scholar. The Justiciar rises as you walk, and pulls the chair out for you.
+
+You take The Queen's seat.
+
+[[Continue|this.goto('intro-2')]]
+
+::Remain standing
+<<do this.image('roundTable')>>
+You ignore the empty chair, and speak to those seated from where you stand.
+
+[[Continue|this.goto('intro-2')]]
+
+::intro-2
+How do you address your knights?
+
+[[Courageous]]
+[[Collected]]
+[[Confident]]
+
+::Courageous
+<<do this.image('sword')>>
+"My mother's death shall not be in vain."
+
+"We need only work together, and there is nothing we cannot achieve!"
+<<BR>>
+Your Cousin attempts to start a round of applause, but stops when no one joins in after the first few claps.
+[-WINE]
+
+[[Continue|this.goto('intro-3')]]
+
+::Collected
+<<do this.image('sword')>>
+"This moment was inevitable, but I am saddened at how soon it has come."
+
+"This will be a difficult role to fill, but I feel confident, knowing that I have you all by my side."
+<<BR>>
+<<do this.image('roundTable')>>
+The room stays silent, but when they look to you, it is with a hint of something more in their eyes.
+[+WINE]
+
+[[Continue|this.goto('intro-3')]]
+
+
+::Confident
+<<do this.image('sword')>>
+"You all used to serve my mother. Now you serve me."
+
+"The Queen is dead. Long live The Queen."
+<<BR>>
+<<do this.image('roundTable')>>
+No one questions your words.
+[+SALT]
+
+[[Continue|this.goto('intro-3')]]
+
+::intro-3
+<<do this.image('scholar')>>
+Eventually, The Scholar speaks up:
+
+"Your Majesty, there is something more we need to share with you."
+
+The Huntress pulls out a map, and places it on the table.
+<<BR>>
+<<do this.image('map')>>
+"As you know, this is the known world."
+
+"There have been reports of troubling nature from the distant corners of the world."
+<<BR>>
+<<do this.image('abstract3')>>
+"People - entire settlements - are going supposedly missing."
+
+"It was just one or two at first, at the furthest reaches. But it's happening more often, and closer."
+<<BR>>
+<<do this.image('scholar')>>
+"Something is coming."
+
+"We don't know what it is, or when it will arrive."
+
+"But we have to prepare for the worst."
+<<BR>>
+<<do this.image('roundTable')>>
+The meeting ends on a dour note.
+
+[[Continue|this.goto('week-mid')]]
+
+
+
+
+
+::the-end
+No one says it aloud, but you are certain that they all feel it the same as you do.
+<<BR>>
+Whatever is coming will arrive tonight.
+
+[[Continue|this.goto('end-choice')]]
+
+::end-choice
+<<do this.image('hall')>>
+<<if this.flag('left-veteran')+this.flag('left-cousin')+this.flag('left-justiciar')===3>>
+Walking through the halls, you spot The Wounded Scholar headed in the opposite direction.
+
+[[Continue|this.goto('scholar-end')]]
 <<else>>
-default state
+Today is your last day.
+
+What do you do with the time you have left?
+
+<<if this.flag('left-veteran') !== 1>>
+[[Tour the barracks|this.goto('salt-event-end')]]
+<<endif>>
+<<if this.flag('left-cousin') !== 1>>
+[[Host a ball|this.goto('wine-event-end')]]
+<<endif>>
+<<if this.flag('left-justiciar') !== 1>>
+[[Preside over court|this.goto('bread-event-end')]]
+<<endif>>
 <<endif>>
 
-[[Back|this.back()]]
-
-
-::br test
-1
-2
-3
+::salt-event-end
+<<do this.image('veteran')>>
+You decide to tour the barracks and see how The Seasoned Veteran is faring with the troops.
 <<BR>>
-4
-5
-6
-7
+You hear the telltale sounds of shouts and clanking metal as you approach.
 <<BR>>
-8
-9
-10
+Something is different, though.
 
-[[start]]
+It sounds scattered, disorganized. It is not the lessons and drills you've come to expect.
+<<BR>>
+<<do this.image('battleWon')>>
+You arrive just in time to witness the end of a fist-fight.
+
+Men stand around in a circle, cheering as a pair scuffle in the dirt.
+<<BR>>
+One has clearly secured the advantage, and pummels the other until someone jumps in to pull him off.
+
+You look around for The Veteran in the crowd, but he is nowhere to be seen.
+
+[[Search for him]]
+[[Leave them alone]]
+
+::Leave them alone
+<<do this.flag('left-veteran', 1)>>
+You decide it would be best not to poke the nest of rowdy soldiers.
+
+A few men attempt sloppy salutes as you leave the barracks.
+<<BR>>
+<<do this.image('hall')>>
+From outside, you hear cheers start up once again, presumably along with another fight.
+
+[[Continue|this.goto('end-choice')]]
+
+
+::Search for him
+<<do this.image('hall')>>
+You head deeper into the barracks, hoping to at least find some explanation as to what is happening.
+<<BR>>
+<<do this.image('veteran')>>
+You find him in the sleeping quarters, laughing along with a dozen or so other men.
+
+You can smell the alcohol before you even enter the room.
+<<BR>>
+"Young miss! Come, join us!"
+
+[[Join them]]
+[[Excuse yourself|this.goto('Leave them alone')]]
+
+::Join them
+<<do this.image('bandaged')>>
+You notice that a number of the faces present are battered and bloodied, but they don't seem to mind.
+
+One of them passes you a jug.
+<<BR>>
+You take a sip and pass it along.
+<<BR>>
+<<do this.image('veteran')>>
+"It's been a long week."
+<<BR>>
+"But nothing like a good fight to calm your nerves, eh?"
+
+The Veteran slaps his neighbour on the back, who coughs and sputters.
+<<BR>>
+"I was just telling the lads about the last time The Avaricious Empire invaded our lands."
+
+"What a fight it was!"
+<<BR>>
+<<do this.image('battle')>>
+"It was the dead of winter. The cowards planned to attack at night, but we were ready for them."
+
+"We simply had to wait..."
+<<BR>>
+He launches into a tale of the old invasion and the ensuing conflicts.
+
+He goes on for hours, revelling in the gory details, cursing betrayals, rising and falling with the tides of war.
+<<BR>>
+<<do this.image('veteran')>>
+He pounds his fists with the beats, pantomimes the swings and blows.
+<<BR>>
+You're unsure how much of it is true, and how much is drunken embellishment, but find yourself getting caught up in the tales nonetheless.
+<<BR>>
+<<do this.image('battleWon')>>
+"...and at long last, we were victorious!"
+
+The gathered crowd cheers, and you along with them.
+<<BR>>
+<<do this.image('veteran')>>
+You realize with a start how much more crowded it is - more soldiers have filtered in from the fights, and they all laugh and carouse together with The Seasoned Veteran.
+<<BR>>
+It's quite a merry band he's put together. But more than that, they're ready.
+
+You can see it in their faces, behind the flushed cheeks and smiles.
+<<BR>>
+They are ready to fight and die in your name.
+[+SALT]
+
+[[Continue|this.goto('the-end2')]]
+
+
+
+
+::wine-event-end
+You expect to find Your Cousin making preparations for yet another grand ball.
+
+Instead, you find them in their chambers, packing a bag.
+<<BR>>
+<<do this.image('cousin')>>
+"I've had enough of this."
+
+"I'm going home."
+<<BR>>
+"Don't try to stop me."
+
+[[Try to stop them]]
+[[Let them go]]
+
+::Let them go
+<<do this.flag('left-cousin',1)>>
+You say that you won't.
+
+The Distant Cousin grab their pack, bids you farewell, and walks past you.
+
+[[Continue|this.goto('end-choice')]]
+
+::Try to stop them
+You calmly remind them that it takes your fastest horses days just to reach the northern coast.
+<<BR>>
+"I don't care."
+<<BR>>
+They place another silken shirt in their pack, then pause.
+
+"Do you know why I came here?"
+<<BR>>
+"It's because I believed that one day, I might rule, and that all this could be mine."
+<<BR>>
+"Don't get me wrong, I had no intention of playing the usurper, I was simply being realistic."
+
+"I was second in line to the throne. Within a couple months of arriving, I was first."
+<<BR>>
+"I'd be lying if I said I didn't still want it."
+
+They resume packing.
+<<BR>>
+"But I don't believe that day will come."
+
+"So I'm not going to sit around and wait for it."
+<<BR>>
+They sling the bag over their shoulder.
+
+"Farewell, Your Majesty. For however long it lasts, you now have my utter and complete support."
+
+They march out the door.
+[+WINE]
+
+[[Continue|this.goto('the-end2')]]
+
+::bread-event-end
+<<if this.flag('relieved-justiciar')>>You decide to preside over the court one last time.<<else>>It is expected of the regent to preside over the court, but The Justiciar has been doing so in absence of The Good Queen.
+
+You decide at long last to take up the duty.<<endif>>
+<<BR>>
+But when you arrive, the court is empty aside from The Noble Justiciar.
+<<BR>>
+<<do this.image('justiciar')>>
+"Ah, Your Majesty."
+
+"You are wondering where everyone is, no doubt?"
+<<BR>>
+"They have stayed home with their families, for the most part."
+<<BR>>
+"I believe they sense what is coming. You feel it too, do you not?"
+
+"A whole kingdom of dogs before a storm."
+<<BR>>
+"And so they choose to spend what may be their last moments with those that matter most."
+<<BR>>
+He sighs.
+
+"And who could blame them?"
+
+"Perhaps you should do the same."
+
+[[Refuse]]
+[[Leave]]
+
+::Leave
+<<do this.flag('left-justiciar', 1)>>
+There is no sense in presiding over an empty court, so you tell him to heed his own words and find a better use of his time.
+
+You leave him to consider what that might be.
+
+[[Continue|this.goto('end-choice')]]
+
+::Refuse
+You tell him it is your court, and that you shall preside over it, courtiers or not.
+<<BR>>
+"Very well, Your Majesty."
+
+"In that case, I was hoping to speak to you about something."
+<<BR>>
+"It's... about The Good Queen."
+<<BR>>
+"We had our differences - quite a lot of them, to be honest."
+
+"But your mother was a good woman."
+<<BR>>
+"Cut down in her prime, truly."
+<<BR>>
+<<if this.stat.bread > 5>>"She would be proud of you."<<else>>"She loved you, no matter what."<<endif>>
+
+"She would want you to know that."
+<<BR>>
+"I only wish..."
+
+He stops, and reconsiders.
+<<BR>>
+"I hope I have been of use to you."
+<<BR>>
+You sit with him awhile in the lonely court.
+
+He does not say much after that, but something tells you he appreciates the company despite the silence.
+[+BREAD]
+
+[[Continue|this.goto('the-end2')]]
+
+
+::scholar-end
+<<do this.image('scholar')>>
+He carries a stack of books in his lap, and moves with a quiet intensity.
+
+"Good evening, Your Majesty."
+<<BR>>
+He does not stop moving, and says his simple greeting in passing.
+
+[[Follow him]]
+[[Leave him]]
+
+::Leave him
+He seems pre-occupied. Whatever it is that has captured his attention, best leave him to it.
+
+Everyone has carefully chosen how to spend their potentially final day, and The Scholar is no exception.
+<<BR>>
+<<do this.image('huntress')>>
+You wonder how The Obsessed Huntress spends hers.
+
+You half-expect for her to be standing there when you turn the next corner, armed with an ineffable purpose, or perhaps some words of wisdom.
+<<BR>>
+<<do this.image('hall')>>
+But she isn't.
+
+[[Continue|this.goto('the-end2')]]
+
+::Follow him
+You turn around, quickly catch up and begin walking alongside him.
+
+He continues talking as if he fully expected you to follow.
+<<BR>>
+"I have a new theory."
+
+"I believe we have been ignoring crucial information all this time."
+<<BR>>
+"Tell me, have you not been watching the stars these past few weeks?"
+<<BR>>
+You admit that you haven't.
+<<BR>>
+"And neither have I!"
+
+He laughs.
+<<BR>>
+You're not sure you've ever heard him laugh before.
+<<BR>>
+He makes a sudden turn, and you follow into a small office.
+
+"I'll be honest, I'm not sure if it's a useful theory."
+<<BR>>
+"Not unless you have any bright ideas on how we might go about viewing the stars with The Sun's light drowning them out."
+<<BR>>
+"Hm. 'Bright' ideas."
+
+He chuckles again, and starts setting his books down on a desk.
+<<BR>>
+You look around and see that there are more books, sheaves of papers littering the room. Some with covers caked in dust, others lying open and dog-eared.
+
+He sets the last of his haul down.
+<<BR>>
+A moment later, he is flipping through pages, quill in hand.
+<<BR>>
+You sit with him awhile.
+
+Occasionally, he asks for you to pass him a book. "No, not that one. Red cover, silver lining."
+<<BR>>
+His focus is intimidating, but it does not last forever.
+
+He sets his pen down with a sigh.
+<<BR>>
+"Oh, if only we had more time."
+
+He looks at you, and you notice the bags under his eyes.
+<<BR>>
+"I've seen my fair share. More than that, perhaps."
+
+"But you... you're so young."
+<<BR>>
+"So much left to discover, so much left to learn."
+<<BR>>
+"You could've been a great Queen, in time."
+
+"Time..."
+<<BR>>
+He rubs his eyes with thumb and forefinger.
+
+"...Time for you to get going, I believe."
+<<BR>>
+"Leave this old man to his books."
+
+"Have a good night, Your Majesty."
+<<BR>>
+You bid him the same, and tell him to try to get some sleep.
+
+[[Continue|this.goto('the-end2')]]
+
+::the-end2
+<<do this.image('hall')>>
+Later that night, you retreat to your chambers, lay down, and close your eyes. You realize that you are exhausted.
+
+Nothing much has happened, and yet the anxiety of it all has haunted you all day.
+<<BR>>
+You want nothing more but to fall asleep, but to fall asleep would mean the day is truly over, and the thought strikes that you may not have another.
+<<BR>>
+So you lay there.
+<<BR>>
+And you wait.
+<<BR>>
+<<do this.image('brush')>>
+You wonder if others are doing the same, if it even matters.
+
+It is a remarkably silent night.
+<<BR Yawn>>
+<<do this.image('hall')>>
+You are so very tired.
+
+[[Stay up]]
+[[Give up]]
+
+::Stay up
+You can feel your thoughts drifting, and open your eyes.
+
+You roll in the covers, and stare out the window.
+<<BR>>
+<<do this.image('moon')>>
+The moon shines, a glazed yellow arc in the starry sky.
+
+[[Stay up|this.goto('Stay up2')]]
+[[Give up]]
+
+::Stay up2
+<<do this.image('hall')>>
+The light of the night sky begins to blur as you feel your lids drooping.
+
+You struggle to keep them open, turn back to stare at the ceiling.
+
+[[Give up]]
+[[Stay up|this.goto('Stay up3')]]
+
+::Stay up3
+<<do this.scene.activePortrait.setTexture('queen');setTimeout(()=>this.scene.activePortrait.setTexture('hall'),50)>>
+Your pulse beats quick in your ears, dull thud and shiver the only thing you can hear.
+
+But eventually it slows.
+[[Continue|this.goto('Give up')]]
+
+::Give up
+<<do this.image('abstract3')>>
+Something in you snaps, and the warm wave of sleep washes over you.
+
+<<if this.stat.bread-this.stat.salt >= 2 && this.stat.bread-this.stat.wine >= 2>>
+[[Continue|this.goto('bread-end')]]
+<<elseif this.stat.salt-this.stat.bread >= 2 && this.stat.salt-this.stat.wine >= 2>>
+[[Continue|this.goto('salt-end')]]
+<<elseif this.stat.wine-this.stat.salt >= 2 && this.stat.wine-this.stat.bread >= 2>>
+[[Continue|this.goto('wine-end')]]
+<<else>>
+[[Continue|this.goto('balance-end')]]
+<<endif>>
+
+
+::bread-end
+<<do this.wonk()>>
+<<do this.image('sky')>>
+Your dreams that night are reassuring. You envision a time after tonight.
+
+After all this has passed.
+<<BR>>
+It is not a time devoid of struggles, but one in which they may be overcome.
+<<BR>>
+<<do this.image('roundTable')>>
+<<do this.textWonk()>>
+The round table gathers, with their Queen to lead them, and they discuss - politics and practice.
+
+They have faced their darkest hour, and lived through it to face another.
+<<BR>>
+<<do this.image('sword')>>
+It is a time in which you can see a future.
+<<BR>>
+It is long, and filled with hardship, but bright nonetheless.
+<<BR>>
+You are anxious for it to come to pass.
+<<BR>>
+To live, to see it all, to grow old and weary.
+<<BR>>
+You can't wait.
+
+[[Continue|this.goto('morning-end')]]
+
+::wine-end
+<<do this.wonk()>>
+<<do this.image('cloudy')>>
+Your dreams that night are gentle. You recall a time when your mother still lived, when the land felt safe.
+
+When things were as they should be.
+<<BR>>
+It is a time in which you need not be Queen, in which an Heir could continue to be Naïve.
+<<BR>>
+<<do this.textWonk()>>
+There are no hushed meetings held late by candlelight, no advisors trying to steer you as they see fit.
+
+There are no wars to be fought, no mysteries to be solved, nothing at all but a smile asking to be returned.
+<<BR>>
+<<do this.image('sword')>>
+It is a time in which you are content.
+<<BR>>
+Happy, even.
+<<BR>>
+It feels as if it could go on forever.
+<<BR>>
+You think you'd be alright with that.
+<<BR>>
+In fact, you want it to.
+<<BR>>
+You want it more than anything.
+<<BR>>
+Your mother reaches out to hold your hand.
+
+[[Continue|this.goto('morning-end')]]
+
+
+
+::salt-end
+<<do this.image('sword')>>
+Your dreams that night are glorious. You see horses and spears, swords and soldiers.
+
+You do not sit idly on your throne, you ride into battle.
+<<BR>>
+<<do this.image('map')>>
+<<do this.wonk()>>
+It is a time in which you need not ponder the nature of your troubles.
+
+You simply strike them until they bleed.
+<<BR>>
+<<do this.image('battleWon')>>
+It is a time of conquest, and your flag flies over all that you can see.
+<<BR>>
+<<do this.image('sword')>>
+<<do this.textWonk()>>
+It is a time in which you fight, and you win.
+<<BR>>
+<<do this.image('sky')>>
+You fight until there is nothing left to be won.
+<<BR>>
+<<do this.image('redSky')>>
+And you continue fighting.
+<<BR>>
+You fight until it hurts, but you do not stop.
+<<BR>>
+<<do this.image('sword')>>
+You will not stop.
+<<BR>>
+<<do this.image('swordBloody')>>
+Please don't let it stop.
+
+[[Continue|this.goto('morning-end')]]
+
+
+
+::balance-end
+<<do this.wonk()>>
+<<do this.image('hall')>>
+Your dreams that night haunt you. You find yourself in court, yet someone else sits on the throne.
+
+You are being put on trial.
+<<BR>>
+<<do this.image('scholar')>>
+The Scholar lists your crimes.
+<<BR>>
+<<do this.image('cousin')>>
+Your Cousin laments the disgrace of the family name.
+<<BR>>
+<<do this.image('veteran')>>
+The Veteran scolds you for your failure to do what's right.
+<<BR>>
+<<do this.image('justiciar')>>
+The Justiciar swears you could never even know what that is.
+<<BR>>
+<<do this.image('huntress')>>
+The Huntress can't even bear to look you in the eyes.
+<<BR>>
+<<do this.image('queen')>>
+It does not take long for The Good Queen to come to a verdict.
+<<BR>>
+Guilty.
+<<BR>>
+<<do this.image('sword')>>
+<<do this.textWonk()>>
+You want to protest, to defend your actions, but the words fail before they reach your lips.
+<<BR>>
+Guards seize you by the shoulders, and drag you outside.
+<<BR>>
+The crowd - when did a crowd gather? - jeers.
+
+They're so loud.
+<<BR>>
+Your ears sting.
+<<BR>>
+Your head pounds.
+
+[[Continue|this.goto('morning-end')]]
+
+
+
+
+
+::morning-end
+<<do this.image('swordBroken')>>
+<<do this.textWonkStop()>>
+You do not wake up in the morning.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[The End|this.unwonk();this.goto('start')]]
+
+
+
+
+::good-end
+<<do this.wonk()>>
+<<do this.textWonk()>>
+<<do this.image('sword')>>
+<<do "you think you're clever?">>
+
+Oh, hello.
+
+You came here looking for the "good end", did you?
+<<BR>>
+<<do "you think it even has one?">>
+
+I imagine you weren't satisfied with the one you got.
+<<BR>>
+<<do "you think they deserve one?">>
+
+Perhaps you were simply curious.
+<<BR>>
+<<do "you understand?">>
+<<do this.image('swordBloody')>>
+Curiousity kills the cat, no matter how cunning or beautiful they may be.
+
+[[Die|this.unwonk();this.textWonkStop();this.goto('start')]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::repeated
+ ######                                                  
+ #     # ###### #####  ######   ##   ##### ###### #####  
+ #     # #      #    # #       #  #    #   #      #    # 
+ ######  #####  #    # #####  #    #   #   #####  #    # 
+ #   #   #      #####  #      ######   #   #      #    # 
+ #    #  #      #      #      #    #   #   #      #    # 
+ #     # ###### #      ###### #    #   #   ###### #####  
+
+::week-start
+<<do this.setRandomStatement()>>
+<<do this.flag('week', this.flag('week')+1)>>
+<<do this.image('roundTable')>>
+You meet with the round table at the start of the week<<if this.flag('week') > 3>> as usual<<endif>>.
+<<BR>>
+<<do this.image('map')>>
+<<if this.flag('week') == 2 || this.flag('week') == 3>>
+<<do this.flag('thisWeeksStatements', {
+	justiciar: `
+"How can we even be sure this threat is real? Rumours and fear-mongering, more likely."
+
+The Justiciar remains skeptical.
+`,
+	scholar: `
+"There is little news. We know only that we have one less week."
+
+The Scholar looks deep in thought, but there is not much to discuss.
+`,
+	veteran: `
+"We've fought worse, I'm sure."
+
+The Veteran says it with a confidence that can only come with experience.
+`,
+	cousin: `
+"I don't understand what you're all so worried about. This is why we have an army, isn't it?"
+
+Your Cousin may be misunderstanding the situation.
+`,
+	huntress: `
+"I bet we've only got a month. Round of drinks on me if I'm wrong."
+
+The Huntress doesn't seem to be taking this too seriously.
+`,
+})>>
+<<elseif this.flag('week') == 4 || this.flag('week') == 5>>
+<<do this.flag('thisWeeksStatements', {
+	justiciar: `
+"How can we even be sure this threat is real?"
+
+The Justiciar insists that faith will see your people through whatever awaits.
+`,
+	scholar: `
+"Our reports are useless."
+
+The Scholar is frustrated.
+`,
+	veteran: `
+"The scouts haven't returned."
+
+The Veteran insists more be sent out.
+`,
+	cousin: `
+"There hasn't been a single boat from The Northern Isles in two weeks."
+
+Your Cousin flinches at the statement.
+`,
+	huntress: `
+"Do you really think sitting around in a circle is going to help us right now?"
+
+The Huntress looks as if she'd rather be anywhere else.
+`,
+})>>
+<<elseif this.flag('week') == 6>>
+<<do this.flag('thisWeeksStatements', {
+	justiciar: `
+"A Reckoning, perhaps? A Judgement? Or is it a Genesis?"
+
+The Justiciar is unusually sombre.
+
+"At the end of the week, will we even still be around to name it?"
+`,
+	scholar: `
+"The remaining scouts refuse to leave our borders."
+
+The Scholar says it calmly, but not without urgency.
+
+"Whatever's out there, it will be upon us within a week."
+`,
+	veteran: `
+"We've fought worse, I'm sure."
+
+The Veteran says it without a shred of confidence.
+
+"At this rate, we'll find out within a week."
+`,
+	cousin: `
+"I'm never going to see The Isles again, am I?"
+
+The situation seems to have finally struck Your Cousin.
+
+"Whatever's out there, it will be upon us within a week."
+`,
+	huntress: `
+"The Queen would know what to do."
+
+The Huntress ignores the look you give her.
+
+"I suppose we only have a week to figure it out."
+`,
+})>>
+<<endif>>
+<<print this.flag('thisWeeksStatements')[this.flag('randomStatement')]>>
+<<BR>>
+<<if this.flag('week') == 2>>
+You work to familiarize yourself with the reported disappearances. There seems to be no link between any of them but distance.
+
+The meeting of the round table comes to a close.
+<<elseif this.flag('week') == 3>>
+There are reports of disappearances closer to your borders.
+
+The round table talks late into the night.
+<<elseif this.flag('week') == 4>>
+It's been a few weeks without progress, and at this rate you will only have a few weeks left.
+
+The meeting of the round table comes to a close.
+<<elseif this.flag('week') == 5>>
+Tensions are running high, as time is running out before reports will be coming from inside your borders.
+
+You have to defuse a shouting match before the meeting comes to a close.
+<<elseif this.flag('week') == 6>>
+There is nothing more to be said.
+
+The meeting of the round table comes to a close.
+<<endif>>
+
+[[Continue|this.goto('week-mid')]]
+
+::week-mid
+<<do this.image('sword')>>
+<<if this.flag('week') == 6>>There is a lull in the middle of the week.
+
+[[Continue|this.goto('the-end')]]]<<else>>
+<<if this.flag('week') == 1>>The next couple days are a flurry of action. Plans are made, a coronation is held, but among it all you manage to spare a day for yourself.<<elseif this.flag('week') == 2>>You had always expected ruling would be exhausting. It seemed as if your mother was constantly busy, but today, you find yourself with the luxury of free time.<<elseif this.flag('week') == 3>>Thankfully your advisors have continued to manage many of the finer details of ruling, and you find yourself with some time throughout the week to spend as you choose.<<else>>As usual, you find yourself with some time throughout the week to spend as you choose.<<endif>>
+
+What do you do?
+
+[[Tour the barracks|this.goto('salt-event')]]
+[[Host a ball|this.goto('wine-event')]]
+[[Preside over court|this.goto('bread-event')]]
+<<endif>>
+
+::week-end
+<<do this.setRandomScene()>>
+<<if this.flag('week') == 1>>
+<<do this.image('scholar')>>
+The Wounded Scholar approaches you the next morning.
+
+"Your Majesty, we have some business to attend to, if you'd please follow me."
+[[Continue|this.goto('week-end1')]]
+<<elseif this.flag('week') == 6>>
+<<do this.image('hall')>>
+There is a lull at the end of the week.
+
+[[Continue|this.goto('the-end')]]
+<<else>>
+<<do this.image('hall')>>
+The days rush by, and before you know it, it is the week-end again.
+[[Continue|this.goto('week-end-end')]]
+<<endif>>
+
+::week-end-end
+<<do this.image('trade')>>
+You spend the morning with The Wounded Scholar reviewing the state of the kingdom.
+
+Status:
+- <<print this.stat.salt>> SALT
+- <<print this.stat.wine>> WINE
+- <<print this.stat.bread>> BREAD
+
+[[Continue|this.goto(this.flag('randomScene'))]]
+
+::week-end1
+"As you know, a kingdom is not much more than the sum of its people."
+
+"And although few will dare to doubt the divine right of your rule, we do still need the resources to back it up."
+<<BR>>
+"Each week-end, we take an inventory of taxes and tributes, assess costs, review military reports, etc."
+
+"It's tedious, but I believe it will be good for you to stay aware of the week-to-week operations of the kingdom."
+<<BR>>
+"Especially given our situation."
+
+[[Continue|this.goto('week-end-end')]]
+
+
+
+
+
+
+
+
+::salt-event
+<<do this.image('veteran')>>
+You decide to tour the barracks and see how The Seasoned Veteran is faring with the troops.
+<<BR>>
+<<do this.image('battle')>>
+<<if this.stat.salt < 5>>Even without a military background yourself, you can see they are in a sorry state, but they do make an effort to brush up in the presence of royalty.<<elseif this.stat.salt < 8>>The Veteran is not satisfied with their performance, but they have improved considerably in the past few weeks. You say as much, and can see the pride light up a few of their faces.<<else>>
+<<do this.image('battleWon')>>
+A demonstration is held. The Veteran grumbles a bit at the disruption of routine, but from your eyes, it appears as grueling as any training regimen.<<endif>>
+[+SALT]
+
+[[Continue|this.goto('week-end')]]
+
+::wine-event
+<<do this.image('hall')>>
+You decide to host a semi-public ball for the members of your court and those affluent enough to purchase entry.
+
+<<BR>>
+<<do this.image('ball')>>
+Whether to celebrate its greatest heights or distract from dire straits, your kingdom is always eager to dine, dance, and mingle.
+
+Your personal appearance is brief, but noted.
+[+WINE]
+
+[[Continue|this.goto('week-end')]]
+
+::bread-event
+<<do this.image('justiciar')>>
+<<if this.flag('relieved-justiciar')>>You decide to preside over the court again, relieving The Noble Justiciar.<<else>>It is expected of the regent to preside over the court, but The Noble Justiciar has been doing so in absence of The Good Queen. He is surprised by your desire to judge first-hand, but relinquishes on your insistence.<<do this.flag('relieved-justiciar',true)>><<endif>>
+<<BR>>
+You listen to grievances, settle petty disputes, and allocate resources as you see fit.
+
+You cannot appease everyone, but you feel your decisions have done more good than harm.
+[+BREAD]
+
+[[Continue|this.goto('week-end')]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::random
+ ######                                    
+ #     #   ##   #    # #####   ####  #    #
+ #     #  #  #  ##   # #    # #    # ##  ##
+ ######  #    # # #  # #    # #    # # ## #
+ #   #   ###### #  # # #    # #    # #    #
+ #    #  #    # #   ## #    # #    # #    #
+ #     # #    # #    # #####   ####  #    #
+
+::funeral
+<<do this.image('hall')>>
+You sit alone in your room that morning, not wanting the day to begin.
+
+There's a knock at the door.
+
+[[Answer it]]
+[[Ignore it]]
+
+::Ignore it
+<<do this.flag('door-ignored', true)>>
+"Young miss?"
+
+A moment passes, and the muffled voice calls out again:
+
+"I believe it's time."
+
+[[Continue|this.goto('Answer it')]]
+
+::Answer it
+<<if this.flag('door-ignored')>>Reluctantly, you<<else>>You<<endif>> ensure you are presentable, and open the door.
+
+The Seasoned Veteran stands in front of you.
+<<BR>>
+<<do this.image('veteran')>>
+He stands tall, but shuffles in his ceremonial suit of armour.
+
+He looks almost afraid to speak, and grips the hilt of his sword tightly.
+<<BR>>
+He begins, stutters, and begins again: "They're waiting for you."
+<<BR>>
+<<do this.image('sword')>>
+Today is The Good Queen's funeral service.
+<<BR>>
+<<do this.image('cousin')>>
+The Veteran leads you to your place in the procession next to your closest remaining relative, The Distant Cousin.
+
+It rains furiously.
+<<BR>>
+<<do this.image('justiciar')>>
+The Noble Justiciar takes it upon himself to deliver the sermon.
+
+He speaks of Gods and Kings, and the Rightful Order of Things.
+<<BR>>
+It is long and dull, but the monotony of it is almost welcome among such grim affairs.
+<<BR>>
+<<do this.image('cousin')>>
+Your Cousin nudges you partway through and whispers: "This one's dry enough to wipe your tears with, eh?"
+[[Laugh]]
+[[Frown]]
+[[Ignore them]]
+
+::Laugh
+You allow yourself the tiniest of chuckles. They smile, and you do too, for a time.
+[+WINE]
+
+[[Continue|this.goto('end-cousin')]]
+
+::Frown
+They're cracking jokes while your mother - and their aunt! - is being laid to rest in a sodden box not five yards away.
+
+You stay silent, but hope that your gaze has communicated exactly how funny you think that was.
+[+SALT]
+
+[[Continue|this.goto('end-cousin')]]
+
+::Ignore them
+<<do this.image('sword')>>
+You don't respond, or even acknowledge they've spoken. You don't know if or how they react, as you keep your eyes locked on The Good Queen's casket.
+[[Continue|this.goto('end-cousin')]]
+
+::end-cousin
+<<do this.image('justiciar')>>
+Eventually, The Justiciar runs out of ways to extract fervour from the loss of your mother, and the casket is lowered into the crypt.
+<<BR>>
+<<do this.image('foggy2')>>
+There are more speeches after the fact, but all you can think about is how seldom it rains this hard.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+
+::knife
+<<do this.image('brush')>>
+The night air is cold on your skin. It's a refreshing change from the cramped humidity of your chambers.
+
+You are not walking long before you feel something colder yet press against your skin.
+<<BR>>
+<<do this.image('sword')>>
+Metal - sharp - against the skin of your neck.
+
+<<if this.stat.salt < 5>>
+[[Continue|this.goto('knife-fail')]]
+<<else>>
+[[Continue|this.goto('knife-pass')]]
+<<endif>>
+
+::knife-pass
+"You and your kin deserve this."
+
+The knife presses in enough to draw blood, but it's a shallow cut.
+
+[[A hesitation]]
+::A hesitation
+You slowly reach for your own blade concealed in your belt.
+
+Your hand touches the hilt, and carefully, ever so carefully, begins to withdraw it.
+
+<<if this.stat.salt < 6>>
+[[Continue|this.goto('knife-fail2')]]
+<<else>>
+[[Continue|this.goto('knife-pass2')]]
+<<endif>>
+
+::knife-pass2
+<<do this.image('swordBloody')>>
+You bring up the blade as quick as you can muster, directly into your assailant's forearm.
+
+They tug once, twisting their wound and dropping their knife from the pain.
+<<BR>>
+A shove sends you sprawling on the ground. By the time you're back on your feet, the would-be assassin has fled into the night, and guards are rushing to your aid.
+<<BR>>
+<<do this.image('brush')>>
+You leave the chase to your guards.
+
+Reaching up to feel the blood trickling from your neck, you're thankful to have simply survived the attack.
+[[Continue|this.goto('week-start')]]
+
+::knife-fail2
+But not carefully enough.
+
+They notice, and you feel their hesitation evaporate.
+
+[[Continue|this.goto('knife-fail')]]
+
+::knife-fail
+<<do this.image('swordBloody')>>
+You don't feel much of anything after that.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[Die|this.goto('start')]]
+
+
+::apparition
+<<do this.image('blank')>>
+You can't sleep that night.
+<<if this.flag('apparition')>>
+[[Continue|this.goto('apparition2')]]
+<<else>>
+[[Continue|this.goto('apparition1')]]
+<<endif>>
+
+::apparition1
+<<do this.image('hall')>>
+<<do this.flag('apparition', true)>>
+You toss and turn to no avail, and eventually resign yourself to a sleepless night.
+
+It's a frustrating but not uncommon occurrence. As usual, you try to walk it off.
+<<BR And then you see it>>
+<<do this.image('apparition')>>
+<<do this.wonk()>>
+It stands at the end of the hall.
+
+The Frightening Apparition has no discernable eyes, but you can feel its gaze.
+
+<<BR It sees you>>
+You want to say something. Call out to it, call for help, anything - but find your words caught in your throat.
+
+The Apparition glides across the floor.
+<<BR It moves closer>>
+<<do this.image('apparitionZoom')>>
+It kneels, and its lack of a face presses closer until it is only inches away from yours.
+
+If not for a few ragged wisps of hair crossing your vision, you'd swear your eyes were closed.
+<<BR>>
+It doesn't speak, but you understand.
+<<BR It wants to know who is responsible>>
+<<BR And it wants them to pay>>
+<<do this.image('blank')>>
+And then it's gone.
+
+[[Cry|this.flag('cried',true);this.goto('shock');]]
+[[Collapse|this.flag('collapsed',true);this.goto('shock');]]
+[[Both|this.flag('cried',true);this.flag('collapsed',true);this.goto('shock');]]
+[[Neither|this.goto('shock');]]
+
+::shock
+<<if this.flag('collapsed')>>Your knees give out the moment it disappears.<<else>>You stand in shock.<<endif>><<if this.flag('cried')>> You hold back from sobbing outright, but the tears flow quick and freely.<<endif>>
+
+You're not sure how long you stay there.
+<<BR>>
+<<do this.unwonk()>>
+You wake up the next morning, wrapped tightly under the covers of your bed.
+
+You've never read much into your dreams before, but you're also not sure that was one.
+[[Continue|this.goto('week-start')]]
+
+
+::apparition2
+<<do this.image('hall')>>
+You consider getting up and wandering the halls, and realize with a start that you already are.
+<<BR>>
+<<do this.wonk()>>
+You feel ill.
+<<BR You feel very ill.>>
+<<do this.image('apparition')>>
+<<do this.textWonk()>>
+Your mother leads you by the hand, but you can't seem to keep up. You never let go, but she gets further and further away.
+
+Everything around you rushes by, and you find yourself struggling to stay oriented.
+[["Mother?"|this.goto('apparition2-1')]]
+[["Where are you taking me?"|this.goto('apparition2-1')]]
+[["Mother!?"|this.goto('apparition2-1')]]
+::apparition2-1
+She doesn't respond.
+
+Instead, she stops, and turns to face you.
+<<BR>>
+<<do this.image('queen')>>
+<<BR They'll take you next.>>
+<<do this.textWonkStop()>>
+<<do this.image('blank')>>
+<<do this.unwonk()>>
+You wake up in a cold sweat the next morning.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+::poison
+<<do this.image('feast')>>
+There is little to discuss at the round table today. Business is concluded quickly, so you make your way to the dining hall and call for food to be brought out early.
+
+<<if this.stat.wine < 5>>
+[[Continue|this.goto('poison-fail')]]
+<<else>>
+[[Continue|this.goto('poison-pass')]]
+<<endif>>
+
+::poison-pass
+There is some small talk before the assemblage begins to eat, interrupted by a sudden commotion from the side of the room.
+
+Your food taster has collapsed.
+<<BR>>
+<<do this.image('abstract5')>>
+They convulse on the floor and cough up blood as others scramble to their aid. The focus is on their dying throes, but you look to your plate, and then around the room.
+
+That was meant for you.
+[[Continue|this.goto('week-start')]]
+
+::poison-fail
+There is some small talk before the assemblage begins to eat. You wash a bite down with a small sip of wine, and feel a sudden tightness in your chest.
+<<BR>>
+<<do this.wonk()>>
+You cough, expecting it to be relieved, but find that it just stings and constricts even further.
+
+[[Take a deep breath|this.flag('breath',true);this.goto('poison2')]]
+[[Call out for help|this.goto('poison2')]]
+
+::poison2
+<<do this.image('abstract5')>>
+You <<if this.flag('breath')>>inhale<<else>>start to speak<<endif>>, but something catches partway through and you erupt into a coughing fit. You move to stand up, but find your legs failing and stumble.
+
+You taste blood.
+<<BR>>
+Your head is pounding, and you can't catch your breath. As the poison takes hold, you're vaguely aware of people scrambling around you, but they all sound so far away.
+
+So very far...
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[Die|this.unwonk();this.goto('start')]]
+
+
+
+
+
+
+::seer
+<<do this.image('feast')>>
+The rest of the day is painfully boring.
+
+That evening, as you are seated for dinner, a soldier, young enough to be no more than two years your elder, interrupts with a message.
+<<BR>>
+"Your Majesty, there is someone here to see you."
+
+"A Seer."
+<<BR>>
+"They say they have information of the utmost importance for... 'The Naïve Heir'."
+
+"I would have sent them away, but... well some of the lads are a tad too superstitious for their own good."
+<<BR>>
+From the look on his face, you're not convinced he's not one of those "lads".
+
+[[Meet with them]]
+[[Send them away]]
+[[Let your advisors deal with it]]
+
+::Send them away
+"Very well. I'll let them know The Queen will not meet with them."
+
+The young soldier departs, and you continue your meal without incident.
+<<BR>>
+<<do this.image('hall')>>
+As you retire to your bedchambers, you could swear the guards have a closer eye on you than usual.
+<<BR>>
+Out of the corner of your eye, you catch one cross his heart and word something breathlessly as you pass.
+
+Superstitious indeed...
+[-SALT]
+
+[[Continue|this.goto('week-start')]]
+
+::Let your advisors deal with it
+<<do this.image('veteran')>>
+The Seasoned Veteran sighs, and rises from the table.
+
+"I swear, you lot would invite an assassin in for tea if they claimed to carry holy leaves..."
+<<BR>>
+"Come on, then," he claps the young soldier on the back and makes his way out.
+<<BR>>
+You continue your meal without incident, and when The Veteran returns, he assures you the guard will not pester you with such trifles again.
+[+SALT]
+<<BR>>
+<<do this.image('hall')>>
+However, the next morning you hear rumours circulating of your reign coming to a "foretold" early demise.
+
+You can't help but feel they're connected with the spurned visitor.
+[-BREAD]
+[[Continue|this.goto('week-start')]]
+
+::Meet with them
+<<do this.image('sword')>>
+You make your way to the court, and allow The Seer to be brought before you.
+<<BR>>
+They bow in deference, but say nothing. They seem to be waiting for permission to speak, so you address them.
+
+"I've been told you have something of interest to us."
+<<BR>>
+Still bowing, they respond: "Nay, I have naught but the clothes on my back."
+
+"But I have seen a great many things."
+
+They rise, eyes unfocused, unseeing.
+<<BR>>
+<<do this.image('redSky')>>
+"A tree, rotted from the roots."
+"A lamb, surrounded by wolves."
+"Heads, mounted on pointed spears."
+"Skies and rivers, red with blood."
+<<BR>>
+<<do this.image('sword')>>
+A smile grows on their face as they rattle off their list.
+
+As they finish, The Noble Justiciar makes it clear that they are having none of this.
+<<BR>>
+<<do this.image('justiciar')>>
+"Blasphemous fiend! You are granted the honour of royal audience, and do nothing but spew insults and heretical nonsense!"
+
+"Explain yourself at once!"
+<<BR>>
+<<do this.image('sword')>>
+The Half-blind Seer holds their arms wide and responds calmly: "I simply repeat what I have seen."
+
+"If my words insult, it is by nature of the story they tell, not by my intent."
+<<BR>>
+He leers from behind a heavy-lidded eye.
+
+"I live only to serve, Your Majesty."
+
+[[Allow The Justiciar to continue]]
+[[Thank The Seer]]
+[[Dismiss The Seer]]
+
+::Allow The Justiciar to continue
+<<do this.image('justiciar')>>
+"You live only because The Queen has not willed otherwise!"
+
+"Perhaps a day or two in the dungeon will remind you of that fact."
+<<BR>>
+<<do this.image('sword')>>
+The Seer laughs, and only cackles louder when the guards seize him and drag him out of the court.
+
+The Justiciar remains incensed by the visitor's words.
+<<BR>>
+<<do this.image('justiciar')>>
+"You'd do well not to allow such fools in your court."
+
+"You are an Heir no longer, but even a Queen may be Naïve unless she demonstrates otherwise."
+[-WINE]
+[[Continue|this.goto('week-start')]]
+
+::Dismiss The Seer
+A wave of your hand, and a pair of guards move towards The Half-blind Seer.
+
+They are escorted out without violence, if not without force, as cackles echo through your halls.
+<<BR>>
+The knights complain about having interrupted a perfectly good dinner for no reason, but the night is otherwise uneventful.
+[-WINE]
+[[Continue|this.goto('week-start')]]
+
+::Thank The Seer
+"Thank you for your service, and for sharing what you've seen. I assure this information will be put to proper use."
+
+Their smile falters, but The Half-blind Seer bows again, mumbling more words of fealty.
+<<BR>>
+They take their leave, and though The Noble Justiciar's face is still twisted in contempt, he holds his tongue.
+
+Perhaps he will think twice before assuming he speaks on your behalf again.
+[+WINE]
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+::window
+<<do this.image('hall')>>
+You wake up the next morning, and pause before starting your day in earnest.
+<<BR>>
+<<do this.image('cloudy')>>
+There is a pleasant view out your window. A tiny sliver of the outside world, captured in glass with the sunlight beaming through.
+
+It is a world at peace.
+
+[[Enjoy it]]
+[[Snap out of it]]
+
+::Enjoy it
+Threats to your life, to your country - they can wait for a day.
+
+After all, this is what they threaten to take away from you, and if you can't enjoy it, then what's even the point?
+[-SALT][+WINE]
+
+[[Continue|this.goto('week-start')]]
+
+::Snap out of it
+But it's a false peace; hardships surround it out of frame.
+
+You can't sit idly by and gaze longingly into the middle-distance: There is work to do.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+::???
+<<do this.image('hall')>>
+Another day, another routine filled with the duties of a regent.
+
+You make your way from the court to your chambers.
+<<BR>>
+"Your Majesty! How are you this evening?"
+
+You turn around to find the source of the voice and see a young noble(?) smiling and bowing slightly.
+
+[["Well."|this.flag('???','well');this.goto('????')]]
+[["Fine."|this.flag('???','fine');this.goto('????')]]
+[["Who are you?"|this.goto('????')]]
+
+::????
+<<if this.flag('???') === 'well'>>"Oh that's wonderful to hear!<<elseif this.flag('???') === 'fine'>>"Ah,<<else>>"Haha, my apologies;<<endif>> I imagine you must be very busy these days, yes?"
+
+[["Yes."|this.flag('???', 'yes');this.goto('?????')]]
+[["No."|this.flag('???', 'no');this.goto('?????')]]
+[["...Who are you?"|this.goto('?????')]]
+
+::?????
+<<if this.flag('???') === 'yes'>>"Ah, well I won't take more of your time then, haha!<<elseif this.flag('???') === 'no'>>"Ha, don't be modest! I'm sure you don't have time for the likes of me.<<else>>"A-ah, I understand...<<endif>> It was so lovely to see you, but I will respectfully be taking my leave."
+
+"Have a good night, Your Majesty!"
+<<BR>>
+And with that, you are alone again in the halls.
+
+<<if !this.flag('???')>>You're quite sure you have no idea what just happened.<<else>>You're not quite sure what just happened.
+[-WINE]<<endif>>
+[[Continue|this.goto('week-start')]]
+
+
+::heat
+<<do this.image('sky')>>
+The heat of the summer is almost unbearable, and rises to a sweltering peak towards the end of the week.
+<<BR>>
+<<do this.image('roundTable')>>
+The round table continues to meet, but the humidity clouds everyone's heads.
+
+The discussions are productive at first, but quickly get heated.
+<<BR>>
+<<do this.image('veteran')>>
+"...look, for the thousandth time, we don't need a naval force."
+<<BR>>
+<<do this.image('cousin')>>
+"A navy is core to any country's strength!"
+<<BR>>
+<<do this.image('veteran')>>
+"But we're LANDLOCKED!"
+<<BR>>
+<<do this.image('cousin')>>
+"Of course we are - we don't have any boats!"
+<<BR>>
+<<do this.image('huntress')>>
+"That's not - ugh, why are we even listening to their opinion on military matters?"
+
+"Royal blood does not bestow you with some hereditary gift of tactics!"
+<<BR>>
+"...no offense, Your Majesty."
+
+[[Scold Your Cousin]]
+[[Scold them all]]
+[[Say nothing]]
+
+
+::Scold Your Cousin
+<<do this.image('sword')>>
+"You want to help. I get it."
+
+"But this isn't the isles, and you're not being helpful."
+<<BR>>
+<<do this.image('roundTable')>>
+The rest of the day is spent lecturing Your Cousin on bordering nations, local geography, etc.
+
+Not much progress is made, but the atmosphere is decidedly less hostile by the end of it.
+[+WINE]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Scold them all
+<<do this.image('sword')>>
+"Enough, all of you."
+
+"I'm the youngest one here, so why are you the ones bickering like children?"
+<<BR>>
+<<do this.image('roundTable')>>
+An awkward silence follows, but when the topic at hand is resumed, heads are kept cool.
+
+The round table discusses tactics for the rest of the day.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Say nothing
+<<do this.image('veteran')>>
+"Have you ever fought a war? Ever been in battle?"
+
+"Ever even held a sword?"
+<<BR>>
+<<do this.image('cousin')>>
+"I-"
+
+A fist slamming on the table cuts them off.
+<<BR>>
+<<do this.image('veteran')>>
+"This isn't a game,"
+<<BR>>
+"and we're not putting children in charge."
+<<BR>>
+<<do this.image('roundTable')>>
+The round table discusses tactics for the rest of the day.
+[+SALT]
+<<BR>>
+<<do this.image('swordBroken')>>
+You and Your Cousin stay silent through all of it.
+[-WINE]
+[[Continue|this.goto('week-start')]]
+
+
+::spill
+<<do this.image('hall')>>
+The day passes by quickly, and you gather for dinner late that evening.
+<<BR>>
+<<do this.image('feast')>>
+The royal kitchen has gone all out tonight, and have prepared a lavish feast.
+
+It is a welcome relief from the stress of the previous week.
+<<BR>>
+The first course is exquisite: small portions of delicious stew consisting of mushrooms, shallots, and strips of wine-infused hare.
+<<BR>>
+You can tell the cook must have been planning tonight in advance.
+
+The meat has been thoroughly marinated; judging from the size and texture, probably for at least a whole day.
+<<BR>>
+The second course looks as if it will top the first, as a variety of meats are brought out.
+
+Before you have a chance to sample any, there is a clank, and you are suddenly doused in the contents of a nearby servant's pitcher.
+<<BR>>
+You don't even have time to react before a guard has tackled the servant to the ground, and others are rushing to check up on you.
+<<BR>>
+You're fine - far more soaked in ale than you'd prefer, but fine.
+
+The Noble Justiciar immediately begins questioning the servant as if they has been put on trial:
+<<BR>>
+<<do this.image('justiciar')>>
+"What's your name? Who put you up to this? Did you really think this attack would be successful?"
+
+"N-no! I didn't mean to!"
+<<BR>>
+<<do this.image('feast')>>
+"I... I just tripped!"
+
+"I swear on The Queen's honour, I'm telling the truth!"
+
+[["I believe you."|this.goto('Pardon')]]
+[["I don't believe you."|this.goto('disbelieve')]]
+[["On The Queen's honour?"|this.goto('honour')]]
+
+::honour
+His face immediately flushes red.
+
+"I mean - uh! I apologize Your Majesty, I mean the late Queen, of course!"
+<<BR>>
+"...n-not that your honour isn't worth swearing by! It's just - I, uh..."
+[[Continue|this.goto('disbelieve')]]
+
+::disbelieve
+<<do this.image('justiciar')>>
+The Noble Justiciar chimes in: "You know, assaulting The Queen is an offence punishable by death."
+
+The blood drains from their face.
+
+[[Pardon]]
+[[Imprison]]
+[[Execute]]
+
+::Pardon
+<<do this.image('feast')>>
+"We all make mistakes. We do not need to prosecute our fellows for bouts of clumsiness."
+
+The servant looks flustered, but incredibly relieved. They thank you profusely, and are ushered back into the kitchens.
+<<BR>>
+The rest of the table is impressed with your ability to retain a level head in the face of embarrassment.
+[+WINE]
+[[Continue|this.goto('week-start')]]
+
+::Imprison
+<<do this.image('sword')>>
+You tell the guard currently restraining the servant to toss them in the dungeon for a week.
+
+Perhaps they'll have learned to watch their balance around royalty when they're released.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+::Execute
+<<do this.image('swordBloody')>>
+You tell the guards to toss them in the dungeon, where they will stay until their appointment with the executioner.
+
+Perhaps this will show the others to watch their balance around royalty.
+[+SALT][-BREAD]
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+::beauty
+<<do this.image('hall')>>
+As you are preparing for bed that night, there is a sound at the door.
+
+[[Open it]]
+[[Keep it closed]]
+
+::Keep it closed
+You decide not to indulge whoever is out in the hall.
+
+A few moments later, you hear them walk away, and retire for the night.
+[[Continue|this.goto('week-start')]]
+
+::Open it
+Standing before you is The Cunning Beauty.
+
+She is known and admired throughout the castle, but has never come calling on you personally.
+<<BR>>
+She requests entrance into your bedchambers.
+
+[[Allow entry]]
+[[Prevent entry]]
+
+::Prevent entry
+You've heard stories of those who've gotten too close to her, only for The Beauty to spurn them at their most vulnerable.
+<<BR>>
+You've had an emotional few weeks, and aren't sure you could handle that right now.
+
+You send her away, hoping she understands, and retire for the night alone.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Allow entry
+You open the door wider, and allow her to walk past you.
+<<BR>>
+She moves with a grace that commands your attention: light on her feet, as if ready to pounce.
+
+She walks silently into the center of the room.
+<<BR>>
+She turns to face you, and opens her mouth to speak:
+<<BR>>
+"meow"
+<<BR>>
+She flops on her side and stretches her whole body, before lazily pulling herself sideways along the floor.
+
+You spend a few minutes scratching her belly before retiring for the night.
+<<BR>>
+The Cunning Beauty cuddles with you as you fall asleep, and is gone by the time you wake up the next day.
+[+WINE]
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+
+
+
+
+::plague
+<<if this.flag('plague') == 1>>
+<<do this.image('justiciar')>>
+The Justiciar calls on you, saying that it is urgent.
+
+[[Continue|this.goto('plague2')]]
+<<else>>
+<<do this.flag('plague', 1)>>
+<<do this.image('roundTable')>>
+The Justiciar has called an urgent meeting of the round table.
+
+[[Continue|this.goto('plague1')]]
+<<endif>>
+
+::plague1
+<<do this.image('justiciar')>>
+"A village twenty miles north of us has been decimated by sickness."
+
+"We believe it's an outbreak of the plague".
+<<BR>>
+<<do this.image('roundTable')>>
+The room goes silent.
+<<BR>>
+<<do this.image('abstract5')>>
+You'd heard stories of the sickness that ravaged the continent, but it all happened years before you were born, and isn't exactly considered polite conversation.
+
+It seems no one is eager to respond.
+
+[[Speak up]]
+[[Stay silent]]
+
+::Speak up
+<<do this.image('sword')>>
+"Well," you clear your throat, "would anyone care to elaborate?"
+
+Eyes flutter across the room, all with the utmost care taken to avoid contact with yours.
+
+[[Look to The Scholar]]
+[[Look to The Veteran]]
+[[Look to The Huntress]]
+[[Look to Your Cousin]]
+
+::Look to The Veteran
+<<do this.image('veteran')>>
+<<do this.flag('looked-veteran', true)>>
+He looks down, and does not look back up.
+
+[[Look to The Scholar]]
+[[Look to The Huntress]]
+<<if !this.flag('looked-cousin')>>[[Look to Your Cousin]]<<endif>>
+
+::Look to Your Cousin
+<<do this.image('cousin')>>
+<<do this.flag('looked-cousin', true)>>
+They look about as confused as you are.
+
+Perhaps the plague spared The Northern Isles?
+
+[[Look to The Scholar]]
+<<if !this.flag('looked-veteran')>>[[Look to The Veteran]]<<endif>>
+[[Look to The Huntress]]
+
+::Look to The Scholar
+<<do this.image('scholar')>>
+He returns a small nod, and inhales:
+
+[[Continue|this.goto('troubling')]]
+
+::Look to The Huntress
+<<do this.image('huntress')>>
+She pretends not to notice at first, then returns your gaze.
+<<BR>>
+"We were driven to the brink of extinction, until the plague had not enough prey to sustain itself."
+
+"Put plainly", she chuckles, "it will kill us."
+
+[[Continue|this.goto('Let The Scholar continue')]]
+
+
+::Stay silent
+The Wounded Scholar is first to break the silence.
+
+[[Continue|this.goto('troubling')]]
+
+::troubling
+<<do this.image('scholar')>>
+"It's troubling news. Very troubling... But it is not a death sentence."
+<<BR>>
+"We suffered many losses," he sighs, "but we have defeated the plague before, and we can do it again."
+
+The Huntress chuckles.
+
+[[Let The Scholar continue]]
+[[Ask her why she laughed]]
+
+
+::Ask her why she laughed
+<<do this.image('huntress')>>
+"We 'defeated' it?"
+
+"We were driven to the brink of extinction, until the plague had not enough prey to sustain itself."
+
+"It will kill us."
+
+[[Continue|this.goto('Let The Scholar continue')]]
+
+
+::Let The Scholar continue
+<<do this.image('scholar')>>
+The Scholar coughs.
+
+"We should send medicine, doctors, whatever we can to try and nip it in the bud."
+<<BR>>
+<<do this.image('huntress')>>
+"You're a fool if you think that will work."
+
+"We need to burn it out. Set fire to the bodies, raze the land, even salt the earth if we think it will help."
+<<BR>>
+<<do this.image('sword')>>
+No one else seems to have any suggestions.
+
+[[Send aid]]
+[[Send flame]]
+[[Send nothing]]
+
+::Send aid
+<<do this.image('sword')>>
+<<do this.flag('plague-decision','aid')>>
+You side with The Scholar, and order for physicians and supplies to be sent at once.
+
+You cannot let your people suffer.
+[+BREAD]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Send flame
+<<do this.image('swordBloody')>>
+<<do this.flag('plague-decision','flame')>>
+You side with The Huntress, and order soldiers to the village, armed with torches.
+
+You cannot help those infected, but you can at least prevent the spread.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Send nothing
+<<do this.image('swordBroken')>>
+You decide to let the villagers fend for themselves.
+
+You don't have the resources to spare, and must simply let the sickness run its course.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+::plague2
+"We've received an update concerning the plague."
+<<BR>>
+<<if this.flag('plague-decision') == 'aid'>>
+"It has spread. We don't quite know the scale of the problem, but it's safe to assume we're dealing with an epidemic."
+
+"At this point, we simply don't have the resources to deal with it."
+[-BREAD]
+<<elseif this.flag('plague-decision') == 'flame'>>
+"It has not been completely contained, but the spread has been mercifully slow."
+
+"It seems our people are safe for the time being. Those spared by the flame, at least."
+[-BREAD]
+<<else>>
+"It has spread. We don't quite know the scale of the problem, but it's safe to assume we're dealing with an epidemic."
+
+"At this point, we simply don't have the resources to deal with it."
+[-BREAD]
+<<endif>>
+<<BR>>
+You wonder if there's more you could have done.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+
+
+
+::huntress
+<<do this.image('huntress')>>
+Walking through the courtyard, you see The Obsessed Huntress by the royal stables, tending to horses.
+
+<<if this.flag('huntress') == 1>>
+[[Visit her again]]
+<<else>>
+[[Visit her]]
+<<endif>>
+[[Ignore her]]
+
+::Ignore her
+<<do this.image('huntress')>>
+You have no interest in her or her horses, and go about your day.
+
+[[Continue|this.goto('week-start')]]
+
+::Visit her
+<<do this.flag('huntress', 1)>>
+As you approach, she crosses one leg with the other and bows, deep and long, drawing out her words as she does so.
+
+"Your Majesty."
+
+[[Question her sincerity]]
+[[Question her role]]
+
+::Question her sincerity
+<<do this.image('sword')>>
+"You're making fun of me, aren't you?"
+
+[[Continue|this.goto('huntress-intro-2')]]
+
+::Question her role
+<<do this.flag('huntress-role',1)>>
+<<do this.image('sword')>>
+"What is it you actually do here?"
+
+"Surely you're not on the round table for your expertise as a stablehand."
+
+[[Continue|this.goto('huntress-intro-2')]]
+
+::huntress-intro-2
+<<do this.image('huntress')>>
+"Oh how keen your senses are! Perhaps they should be calling you 'The Huntress' from now on!"
+<<BR>>
+"Of course, that would make me Queen, which simply won't do."
+
+[["Why not?"|this.goto('why-not')]]
+[["I agree."|this.goto('agree')]]
+
+::why-not
+She pauses briefly to consider the question.
+
+"Well, you know what they did to the last one don't you?"
+
+[[Continue|this.goto('dunno')]]
+
+::agree
+She blinks, seemingly ambivalent at having not gotten a rise out of you.
+
+"Probably for the best; after all, we both know what they did to the last one, right?"
+
+[[Continue|this.goto('dunno')]]
+
+::dunno
+<<do this.image('queen')>>
+You don't, actually.
+
+Details of her death have been shared only with a select few, and The Justiciar has adamantly refused to tell you.
+<<BR>>
+<<do this.image('justiciar')>>
+"Unfit for a Queen to dwell on such morbid affairs", he says.
+<<BR>>
+<<do this.image('huntress')>>
+You don't have to answer though, as The Huntress has already moved on from her apparently rhetorical question.
+
+<<if this.flag('huntress-role') == 1>>"But getting back to your original question:"
+
+[[Continue|this.goto('huntress-2')]]
+<<else>>"But I assume you're not here to play princess and the pauper. Did you need something of me?"
+
+[[Question her role|this.goto('huntress-2')]]
+[[Nothing]]
+<<endif>>
+
+::Nothing
+You've had enough of this exchange, and leave her to her horses.
+
+[[Continue|this.goto('week-start')]]
+
+::huntress-2
+"I hunt."
+<<BR>>
+"And, at the insistence of The Good Queen, I keep my eyes open, and make sure others do as well."
+<<BR>>
+There's a shift in her posture, as if she's suddenly decided she has somewhere else to be.
+
+"That'll be all for tonight."
+<<BR>>
+<<do this.image('brush')>>
+You're fairly certain that as The Queen, you're supposed to be the one dismissing people from conversations, but she has already walked off.
+[-WINE]
+
+[[Continue|this.goto('week-start')]]
+
+::Visit her again
+"Your Majesty."
+<<BR>>
+"I've been thinking about this situation we've found ourselves in."
+
+She seems more serious than usual.
+<<BR>>
+<<do this.image('map')>>
+"When the reports of the first disappearances came in, they told us which towns and villages had been affected."
+
+"They listed populations, and the names of figures of importance."
+<<BR>>
+<<do this.image('huntress')>>
+"I asked whether the animals had disappeared too."
+
+"Do you know what their answer was?"
+<<BR>>
+<<do this.image('blank')>>
+"They didn't know."
+<<BR>>
+<<do this.image('huntress')>>
+She sighs.
+
+"We've since learned, yes - the animals are also disappearing."
+
+"But those first reports still bother me."
+<<BR>>
+"Imagine, travelling across the countryside for days at a time, not seeing a single creature, and not even noticing."
+
+"Not thinking it worthwhile, but for the lack of humans."
+<<BR>>
+"Even when we know so little, people find it so easy to think that it's about us - that we matter."
+
+"But I don't think we do. No more than anything else, at least."
+<<BR>>
+She doesn't look at you and continues her work.
+
+[[Disagree]]
+[[Say nothing|this.goto('huntress-2-2')]]
+
+::Disagree
+<<do this.image('sword')>>
+"You're wrong."
+<<BR>>
+"You can't blame people for thinking of themselves first."
+
+"And even if we're not the only ones affected, it's not as if the animals are going to do anything about it for us."
+<<BR>>
+"What we choose to do is what matters."
+<<BR>>
+<<do this.image('huntress')>>
+She smirks.
+
+"You know, sometimes you sound just like your mother."
+[[Continue|this.goto('huntress-2-2')]]
+
+::huntress-2-2
+She feeds the horses, and brushes their hair, clearly having nothing more to say.
+
+You sit with her for awhile before heading back.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+::strike
+<<do this.image('hall')>>
+There's a knock at your door in the evening, and you hear The Seasoned Veteran call out for you.
+
+"Young miss?"
+<<BR>>
+<<do this.image('veteran')>>
+You open the door for him and invite him to take a seat.
+<<BR>>
+"Sorry to bother you so late, but we're having a bit of an... issue, with some of the scouts."
+<<BR>>
+"They're refusing to go out."
+
+"They're afraid of... whatever it is that's causing these disappearances."
+<<BR>>
+"I don't blame them, to be honest<<if this.flag('week') > 3>> - especially since the last batch never returned<<endif>>."
+
+"It's not natural."
+
+[[Allow it]]
+[[Send them anyway]]
+
+::Allow it
+"As you wish. That was my instinct too."
+
+"It's probably for the best. It's been weeks since the first reports, and frankly we've learned next to nothing."
+<<BR>>
+"I'm sure the lads'll appreciate it. G'night, young miss."
+[+BREAD]
+
+[[Continue|this.goto('week-start')]]
+
+::Send them anyway
+<<do this.image('sword')>>
+"Under threat of imprisonment, if necessary."
+
+The Veteran begins to disagree, but thinks better of it and gets up to relay your orders.
+<<BR>>
+You go to sleep later that evening, thinking nothing more of it.
+[+SALT]
+
+[[Continue|this.goto('week-start')]]
+
+
+
+::sermon
+<<do this.image('hall')>>
+Light falls through your window in the morning, slowly stirring you awake.
+
+As you lie in bed, you recall that The Noble Justiciar has arranged for a special sermon of some sort to take place early this morning.
+
+[[Attend]]
+[[Sleep in]]
+
+::Attend
+Although it will be a bore, it will be good for the people to see you among them.
+
+You prepare for the day and make your way to the chapel.
+<<BR>>
+The turnout is modest.
+
+There is a low whisper throughout the room, as people speculate on what the occasion is.
+<<BR>>
+These sorts of gatherings are usually restricted to holidays and events of great import (one was held during the week of your coronation), but there seems to be no impetus today.
+<<BR>>
+<<do this.image('justiciar')>>
+A few more filter into the crowd before The Justiciar stands at the front, and begins to speak.
+<<BR>>
+He speaks of endings - of lives; of countries; of everything.
+<<BR>>
+He speaks of the importance of having faith in the face of such endings.
+
+Of having faith in the face of losing everything else.
+<<BR>>
+"For if you do not have faith, what do you have?"
+<<BR>>
+He pauses on this. For effect, it seems - until it has been too long and the silence now hangs in the air, unbroken.
+
+Was he... expecting an answer?
+<<BR>>
+When he resumes, he has changed topics, and is noticeably less cohesive.
+
+He rambles about protecting your fellows, loyalty to family, and other similar affairs.
+<<BR>>
+It is entirely too long, and any concerns people may have had over the strange opening are likely outweighed with boredom by the end.
+<<BR>>
+<<do this.image('hall')>>
+When it is finally over and the crowd leaves, it is mostly as confused as they had entered, but a few move with purpose, inspiration brightening their eyes.
+[+BREAD]
+
+[[Continue|this.goto('week-start')]]
+
+
+::Sleep in
+You would rather go back to sleep in the comfort of your own bed than doze off listening to The Justiciar drone on in public.
+<<BR>>
+You are The Queen, after all. If you aren't there, it will simply be assumed that you had more important business to attend to.
+[+WINE]
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+
+::messenger
+<<do this.image('hall')>>
+You descend the stairs towards the main hall as you make your way to court for the day.
+
+<<if this.flag('messenger') == 1>>
+[[Continue|this.goto('messenger2')]]
+<<else>>
+[[Continue|this.goto('messenger1')]]
+<<endif>>
+
+::messenger1
+<<do this.flag('messenger', 1)>>
+As you near, you expect to hear the chattering of the common folk as they prepare for their requests, but are instead met with silence.
+<<BR>>
+It's odd, but perhaps you will have a peaceful day at court for once.
+<<BR>>
+<<do this.image('sword')>>
+As you enter the hall, the quiet is shattered by a deafening ensemble of trumpets.
+<<BR>>
+You recoil and cover your ears in shock. Through the ringing, you hear a shrill voice.
+<<BR>>
+<<do this.image('messenger')>>
+"Good day Your Majesty!"
+
+[["What is the meaning of this?"|this.goto('meaning-of-this')]]
+[["Good day to you as well."|this.goto('Listen politely')]]
+
+::meaning-of-this
+"I apologize for causing you stress so early in the morning my fair lady, it was not my intention to put you off balance."
+
+"Ah, but where are my manners?"
+<<BR>>
+"I am an emissary of The Empire and have very urgent matters to discuss with you."
+
+"If my lady has regained her composure, that is."
+
+[["I am fine, thank you."|this.goto('Listen politely')]]
+[["You dare speak in such fashion to The Queen?"|this.goto('dare-to-speak')]]
+
+::dare-to-speak
+"Oh I do apologize Your Majesty. I should have known better."
+
+"I understand that you are going through an incredibly trying time."
+<<BR>>
+"The Emperor was absolutely heartbroken to hear of your mother's passing and sends his appropriately sombre regards, along with the rest of his message."
+
+"Would you hear what I have come to say?"
+
+[[Listen politely]]
+[[Call for your guards]]
+
+
+::Call for your guards
+You look to the guards of your great hall, standing on either side of your insolent guest. You begin to open your mouth, but stop when you feel a light hand on your shoulder.
+<<BR>>
+<<do this.image('huntress')>>
+You turn to see The Huntress, having easily caught you unawares.
+"Best not be hasty, Your Majesty."
+<<BR>>
+"As you know, The Avaricious Empire lies just to the south-east of our forest lands."
+
+"They are strong in number, and are almost certainly aware of our current situation."
+<<BR>>
+"It would be wise to not spark unnecessary conflict."
+<<BR>>
+<<do this.image('messenger')>>
+You take heed of your advisor's words and turn to listen to the boorish man.
+
+[[Continue|this.goto('Listen politely')]]
+
+
+::Listen politely
+You wave your hand, prompting the man to begin.
+
+"Your Majesty, we of The Empire have been working to overcome the plight facing our nations, and would like to offer you our hand."
+<<BR>>
+"You are shocked by this generosity, I'm sure, but The Emperor is indeed most gracious."
+
+"He will lend your people and countrymen aid. Food, medicine, work, and protection."
+<<BR>>
+"No longer will they have to endure their struggles alone."
+<<BR>>
+<<do this.image('sword')>>
+You pause to consider what is being offered.
+
+"Surely there's a catch. Gracious though he may be, I assume this is not purely an act of charity."
+<<BR>>
+<<do this.image('messenger')>>
+The Slithering Emissary looks at you, firm smile never faltering.
+
+"There is a coldness in your voice that I do not appreciate Your Majesty."
+<<BR>>
+"But alas, it is true: Our aid is not without its conditions."
+<<BR>>
+"For our help in restoring the strength of your people, The Emperor requests your fealty."
+<<BR>>
+"Become a vassal to The Empire, and witness its many riches for yourself."
+<<BR>>
+You are unsure how to react to such an audacious proposal.
+<<BR>>
+"But of course, we do not expect you to answer right away."
+
+"We only ask that you consider the offer."
+<<BR>>
+"And of course, as a token of our good will, we hope you will accept the modest offering of support we bring with us."
+
+He snaps his fingers, and members of his party come forth with a variety of sacks.
+<<BR>>
+They open them up to reveal grain, spices, and other similar goods from The Empire's territory.
+
+[[Accept the gift]]
+[[Decline the gift]]
+
+::Accept the gift
+"Very well. We shall consider your offer."
+
+"In the meantime, please give your Emperor our thanks for this gift."
+<<BR>>
+You motion for some guards to relieve the party of their load.
+[+BREAD]
+
+"Of course Your Majesty; I'm sure he will be delighted to hear it."
+<<BR>>
+The Emissary bows once more, and the foreigners take their leave.
+
+You are certain that they will be back some day.
+
+[[Continue|this.goto('week-start')]]
+
+::Decline the gift
+<<do this.image('sword')>>
+"We appreciate the offer, but we have no need of The Empire's charity at the time being."
+<<BR>>
+<<do this.image('messenger')>>
+The Slithering Emissary's smile shrinks slightly.
+[+WINE]
+
+"We meant no disrespect, of course. I would hate for this misunderstanding to sour your opinion of The Emperor."
+<<BR>>
+He motions for his party to retrieve their load.
+
+"We will take our leave, but please remember Your Majesty, that the offer stands."
+<<BR>>
+The Emissary and his fellows leave your court.
+
+You are certain that they will be back some day.
+
+[[Continue|this.goto('week-start')]]
+
+::messenger2
+<<do this.image('huntress')>>
+As you sit, The Huntress approaches, eager to speak.
+<<BR>>
+"Your Majesty, that fool from The Avaricious Empire will be here by the end of the day."
+<<BR>>
+"He will be expecting an answer to their 'offer'."
+
+"I hope that you know what must be done."
+<<BR>>
+<<do this.image('hall')>>
+It is only a few short hours before she is proven correct, and The Emissary arrives.
+<<BR>>
+<<do this.image('messenger')>>
+"Ah, Your Majesty!"
+
+Trumpets blare once again with the arrival of his party.
+
+"I hope I find you well this day."
+<<BR>>
+"We had hoped to allow you another week or so to consider our offer, but The Emperor has made it clear that time is of the essence."
+
+"You have, of course, considered our offer, yes?"
+<<BR>>
+"It would after all be very wise to join us. Our strength, as you know, is immense."
+
+"Experienced leadership is needed to face this land's troubles, and return it to the way it was before The Good Queen's passing."
+<<BR>>
+"If I may be so bold, Your Majesty, you have no such experience."
+<<BR>>
+He all but insults you to your face, yet none could say his claims are unfounded.
+
+You feel as if they believe you have no choice but to accept, and are toying with you.
+<<BR>>
+You look around the court, seeing dozens of anxious eyes pointing back.
+
+Each is tinted with a variety of emotion: pride, contempt, fear.
+<<BR>>
+<<do this.image('sword')>>
+You wonder what they see in your eyes, as everyone waits for your answer.
+<<BR>>
+<<do this.image('messenger')>>
+Breaking the silence, The Slithering Emissary calls out to you.
+
+"Well, Your Majesty - what do you say?"
+
+[[Accept the offer]]
+[[Decline the offer]]
+
+::Accept the offer
+As your knights, your countrymen, and the party of The Avaricious Empire stare, you begin to speak.
+<<BR>>
+<<do this.image('sword')>>
+"I believe in my abilities..."
+<<BR>>
+You take a deep breath.
+<<BR>>
+<<do this.image('swordBroken')>>
+"But, it is as you say."
+
+You feel your throat tighten slightly.
+<<BR>>
+You can't help but look down at your feet as silence once again fills your court.
+<<BR>>
+"Try as I might, I know in my heart that I can never follow the example set by my mother, and lead this kingdom back to glory."
+<<BR>>
+Slowly, you lift your head to face those gathered before you.
+
+"Though it brings me shame, I would rather suffer this than impose suffering upon my people."
+<<BR>>
+"If they are to face hardship, it should not be due to royal hubris."
+<<BR>>
+<<do this.image('messenger')>>
+You step forward towards The Emissary. The Huntress tries to pull you back but you brush her off.
+
+"If you can promise prosperity, and happiness for my people, I will gladly lay down the crown in service to The Empire."
+<<BR>>
+The Emissary bows to you, and tilts his head up, eyes wide as his grin.
+
+"Of course my lady. The Empire will do everything within it's power to guide this land to glory."
+<<BR>>
+"Now, as a token of good faith, I shall take your crown back to our Emperor for the time being."
+<<BR>>
+The Emissary reaches out with an open hand, palm to the heavens, as your hands make their way up towards your temples.
+<<BR>>
+<<do this.image('huntress')>>
+"You cannot do this!" The Huntress shouts.
+
+"This will be the end of our kingdom, the end of our legacy!"
+<<BR>>
+<<do this.image('swordBroken')>>
+Her words sting, but you have made your decision.
+
+Gently, you lift your crown - your mothers crown - off your head, and place it in The Emissary's hand.
+<<BR>>
+<<do this.image('messenger')>>
+"Thank you my lady. You are indeed wiser than I had thought."
+
+"I shall be back with instructions from The Emperor, as well as aid."
+<<BR>>
+The Emissary and his party turn around and walk out of the court, beginning their journey back to The Avaricious Empire.
+
+You suppose that now, one could say they were already within The Empire's borders.
+<<BR>>
+<<do this.image('roundTable')>>
+In the coming days, the round table continues to meet, but you find it difficult to bother with their plots and plans.
+
+All you can think of is how The Empire's takeover will fare.
+<<BR>>
+<<do this.image('map')>>
+Perhaps they'll stay true to their word, and solve the problems you could never hope to understand, allowing the land and people to thrive once again.
+[-BREAD]
+<<BR>>
+<<do this.image('ball')>>
+Perhaps they'll want to wed you off to some son of The Empire, joining the royal lines while ensuring one will overshadow the other.
+[-WINE]
+<<BR>>
+<<do this.image('assassin')>>
+Perhaps they'll prefer to stamp out your family more definitively, and have you and Your Cousin dealt with under cover of night.
+[-SALT]
+<<BR>>
+<<do this.image('blank')>>
+Perhaps they'll have nothing to do with you, simply letting time run its course as the identity of your once great kingdom is slowly erased.
+<<BR>>
+<<do this.image('swordBroken')>>
+In any case, your part in this story is over.
+
+You will not be remembered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[The End|this.goto('start')]]
+
+::Decline the offer
+<<do this.image('sword')>>
+"I say no."
+<<BR>>
+<<do this.image('messenger')>>
+The Slithering Emissary stands in silence, apparently expecting more to be said.
+<<BR>>
+<<do this.image('sword')>>
+"Well? You have your answer - will that be all?"
+<<BR>>
+<<do this.image('messenger')>>
+"Ah..."
+<<BR>>
+"Perhaps, Your Majesty, you would simply like more time to consider?"
+<<BR>>
+"As I said earlier-"
+<<BR "No.">>
+<<do this.image('sword')>>
+"If you wish to repeat this conversation, you are wasting my time and yours."
+<<BR>>
+"Now, if you would kindly remove yourself from my court, it would spare me the trouble of ordering the guards to have you removed."
+[+SALT]
+<<BR>>
+<<do this.image('messenger')>>
+His smile gone, The Emissary seems at a loss for words.
+
+He stands, stunned for a moment, then gives a quick bow, and turns to leave.
+<<BR>>
+<<do this.image('sword')>>
+You imagine you won't be hearing from him again any time soon.
+
+[[Continue|this.goto('week-start')]]
+
+
+
+
+
+
+
+
+
 ::exhausted
 // out of random events!
+[[Continue|this.goto('week-start')]]
 

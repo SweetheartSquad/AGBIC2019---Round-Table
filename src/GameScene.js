@@ -14,9 +14,9 @@ export class Settings {
 
 const initialFlags = {};
 const initialStats = {
-	salt: 0,
-	wine: 1,
-	bread: 2,
+	salt: 3,
+	wine: 3,
+	bread: 3,
 };
 
 let flags = { ...initialFlags };
