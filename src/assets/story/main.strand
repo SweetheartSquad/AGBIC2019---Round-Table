@@ -261,7 +261,7 @@ What do you do with the time you have left?
 [[Tour the barracks|this.goto('salt-event-end')]]
 <<endif>>
 <<if this.flag('left-cousin') !== 1>>
-[[Host a ball|this.goto('wine-event-end')]]
+[[Attend a ball|this.goto('wine-event-end')]]
 <<endif>>
 <<if this.flag('left-justiciar') !== 1>>
 [[Preside over court|this.goto('bread-event-end')]]
@@ -1015,7 +1015,7 @@ The meeting of the round table comes to a close.
 What do you do?
 
 [[Tour the barracks|this.goto('salt-event')]]
-[[Host a ball|this.goto('wine-event')]]
+[[Attend a ball|this.goto('wine-event')]]
 [[Preside over court|this.goto('bread-event')]]
 <<endif>>
 
@@ -1083,13 +1083,18 @@ A demonstration is held. The Veteran grumbles a bit at the disruption of routine
 
 ::wine-event
 <<do this.image('hall')>>
-You decide to host a semi-public ball for the members of your court and those affluent enough to purchase entry.
+<<if this.flag('baller')==1>>Your Cousin is hosting yet another ball.<<else>><<do this.flag('baller',1)>>Your Cousin has decided to host a semi-public ball for the members of your court and those affluent enough to purchase entry.<<endif>>
 
+You decide to attend.
 <<BR>>
 <<do this.image('ball')>>
-Whether to celebrate its greatest heights or distract from dire straits, your kingdom is always eager to dine, dance, and mingle.
+<<if this.stat.wine > 5>>Whether to celebrate its greatest heights or distract from dire straits, your kingdom is always eager to dine, dance, and mingle.
 
-Your personal appearance is brief, but noted.
+Your Cousin calls for a toast, and you deliver.<<elseif this.stat.wine > 3>>The Distant Cousin glides from one circle of courtiers to the next, taking your hand and making your introductions.
+
+It is disorienting at first, but you quickly find yourself getting into the swing of it.<<else>>It is a humble affair, but drink flows freely, and it lightens the mood considerably.
+
+Your personal appearance is brief, but noted.<<endif>>
 [+WINE]
 
 [[Continue|this.goto('week-end')]]
