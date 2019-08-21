@@ -1040,14 +1040,24 @@ The days rush by, and before you know it, it is the week-end again.
 
 ::week-end-end
 <<do this.image('trade')>>
-You spend the morning with The Wounded Scholar reviewing the state of the kingdom.
+You spend the morning with The Scholar reviewing the state of the kingdom.
 
 Status:
 - <<print this.stat.salt>> SALT
 - <<print this.stat.wine>> WINE
 - <<print this.stat.bread>> BREAD
 
+<<if this.stat.salt == 1>>Your forces struggle to maintain order. <<elseif this.stat.wine == 1>>You have lost favour with many. <<elseif this.stat.bread == 1>>There is an unrest throughout your kingdom.<<endif>>
+
+<<if this.stat.salt == 0>>
+[[Continue|this.goto('salt-death')]]
+<<elseif this.stat.wine == 0>>
+[[Continue|this.goto('wine-death')]]
+<<elseif this.stat.bread == 0>>
+[[Continue|this.goto('bread-death')]]
+<<else>>
 [[Continue|this.goto(this.flag('randomScene'))]]
+<<endif>>
 
 ::week-end1
 "As you know, a kingdom is not much more than the sum of its people."
@@ -1062,6 +1072,97 @@ Status:
 
 [[Continue|this.goto('week-end-end')]]
 
+
+
+::salt-death
+// not possible to get here
+
+::wine-death
+You have lost favour with many.
+<<BR>>
+<<do this.image('sword')>>
+It worries you at times, but your remind yourself that <<if this.stat.salt > this.stat.bread>>a Queen's word is law<<else>>a Queen serves her people<<endif>>, not her courtiers.
+<<BR>>
+You walk through the halls, passing by portraits of your mother.
+
+You can't help but wonder if she felt the same during her reign.
+<<BR>>
+<<do this.image('swordBloody')>>
+You feel a sudden pain in your back.
+<<BR>>
+And another, and another.
+<<BR>>
+You fall to your knees.
+<<BR>>
+There are more stabs, but you feel them less than the first.
+
+Your face hits the floor.
+<<BR>>
+You try to turn your head, to see the source of this betrayal.
+
+But you can't move.
+<<BR>>
+You can't breathe.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[Die|this.goto('start')]]
+
+::bread-death
+There is an unrest throughout your kingdom.
+
+The people no longer sing praises of their Queen.
+<<BR>>
+<<do this.image('battle')>>
+The crowd gathered outside the castle is small at first. They're loud, but harmless, at first.
+
+Your guards stop them from entering, at first.
+<<BR>>
+<<do this.image('sword')>>
+It's not long before they're outside your door.
+<<BR>>
+And when they take you, they do not hurt you.
+<<BR>>
+<<do this.image('swordBloody')>>
+At first.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(psst secret text to delay option from showing)
+
+[[Die|this.goto('start')]]
 
 
 
