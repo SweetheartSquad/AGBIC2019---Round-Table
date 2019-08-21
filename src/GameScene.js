@@ -162,7 +162,7 @@ export default class GameScene extends Phaser.Scene {
 		this.music.play();
 		this.add.tween({
 			targets: this.music,
-			volume: 1,
+			volume: 0.5,
 			duration: 8000,
 			ease: "Cubic.easeInOut",
 		});
@@ -254,6 +254,9 @@ export default class GameScene extends Phaser.Scene {
 					yOffset += c.height;
 					c.on('click', () => {
 						strand.eval(action);
+						this.sound.play('sfxLong', {
+							detune: Math.random()*200 + 100,
+						});
 					});
 					c.alpha = 0;
 					this.add.tween({

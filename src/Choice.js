@@ -15,6 +15,7 @@ export default class Choice extends Phaser.GameObjects.DynamicBitmapText {
 		});
 		this.on('pointerover', () => {
 			this.tint = down ? cActive : cOver;
+			scene.sound.play(`sfxShort${Math.floor(Math.random()*3)+1}`);
 		});
 		this.on('pointerout', () => {
 			this.tint = undefined;
