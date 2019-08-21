@@ -148,7 +148,7 @@ export default class GameScene extends Phaser.Scene {
 	create() {
 		// HACK: there seems to a be a bug where button hit areas aren't respected
 		// until the game has been resized; this fixes it
-		game.scale.refresh();
+		this.game.scale.refresh();
 
 		this.sound.pauseOnBlur = false;
 		this.music = this.sound.add('music', {
