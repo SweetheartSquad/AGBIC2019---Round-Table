@@ -80,7 +80,7 @@ This text will refresh when the settings change to demonstrate the new speed.
 ::About
 <<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
 <<do this.image('heart')>>
-Made by Sean & Michael from SweetHeart Squad for A Game By Its Cover 2019.
+Made by Sean & Michael of SweetHeart Squad for A Game By Its Cover 2019.
 
 Based on Famicase artwork by Matt Kump.
 
@@ -954,7 +954,7 @@ The Justiciar is unusually sombre.
 
 The Scholar says it calmly, but not without urgency.
 
-"Whatever's out there, it will be upon us within a week."
+"Whatever is out there, it will be upon us within a week."
 `,
 	veteran: `
 "We've fought worse, I'm sure."
@@ -968,7 +968,7 @@ The Veteran says it without a shred of confidence.
 
 The situation seems to have finally struck Your Cousin.
 
-"Whatever's out there, it will be upon us within a week."
+"Whatever is out there, it will be upon us within a week."
 `,
 	huntress: `
 "The Queen would know what to do."
