@@ -1,6 +1,6 @@
 # ROUND TABLE
 
-![cover](./cover.GIF)
+![cover](./cover.gif)
 
 ## Available Commands
 
