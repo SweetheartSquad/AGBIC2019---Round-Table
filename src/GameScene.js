@@ -115,7 +115,7 @@ class StrandE extends Strand {
 
 	textWonk() {
 		this.tx = this.scene.add.tween({
-			targets: strand.scene.eventText,
+			targets: this.scene.eventText,
 			scaleX: 0.98,
 			duration: 3232,
 			ease: "Back.easeInOut",
@@ -123,7 +123,7 @@ class StrandE extends Strand {
 			yoyo: true,
 		});
 		this.ty = this.scene.add.tween({
-			targets: strand.scene.eventText,
+			targets: this.scene.eventText,
 			scaleY: 0.96,
 			duration: 2323,
 			ease: "Back.easeInOut",
