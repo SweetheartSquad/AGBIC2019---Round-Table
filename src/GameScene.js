@@ -286,6 +286,7 @@ export default class GameScene extends Phaser.Scene {
 				.replace(/\[\-BREAD\]/g, '[-BREAD]<<do this.plus("bread", -1)>>'),
 		});
 		strand.goto('start');
+		this.strand = strand;
 	}
 
 	update(time) {
