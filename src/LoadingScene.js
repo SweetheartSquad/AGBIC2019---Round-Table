@@ -16,6 +16,7 @@ import * as images from './assets/images';
 export default class LoadingScene extends Phaser.Scene {
 	constructor() {
 		super({ key: 'loading' });
+		window.game.canvas.ariaHidden = true;
 	}
 
 	preload() {
