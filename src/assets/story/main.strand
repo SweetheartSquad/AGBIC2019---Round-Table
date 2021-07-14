@@ -95,7 +95,11 @@ Based on Famicase artwork by Matt Kump.
 The Good Queen has passed, as all must. The burden to rule falls now to The Naïve Heir, and their table of knights.
 
 To You, and your advisors.
-<<BR>>
+
+[[Continue|this.allowSkip=true;this.goto('intro')]]
+<<if this.allowSkip>>[[Skip intro|this.goto('week-mid')]]<<endif>>
+
+::intro
 It happened so suddenly. "Cut down in her prime", they'll say, looking back on it.
 
 But that's not what they say today.
