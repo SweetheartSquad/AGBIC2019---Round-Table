@@ -822,7 +822,7 @@ You do not wake up in the morning.
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[The End|this.unwonk();this.goto('start')]]
 
@@ -1121,7 +1121,7 @@ You can't breathe.
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[Die|this.goto('start')]]
 
@@ -1160,7 +1160,7 @@ At first.
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[Die|this.goto('start')]]
 
@@ -1426,7 +1426,7 @@ You don't feel much of anything after that.
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[Die|this.goto('start')]]
 
@@ -1568,7 +1568,7 @@ So very far...
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[Die|this.unwonk();this.goto('start')]]
 
@@ -2779,7 +2779,7 @@ You will not be remembered.
 
 
 
-(psst secret text to delay option from showing)
+<<print new Array(47).fill('\u0000').join('')>>
 
 [[The End|this.goto('start')]]
 
