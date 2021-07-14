@@ -1,12 +1,8 @@
 import Phaser from 'phaser';
 import Strand from 'strand-core';
-
-import Shader from './Shader';
-import EventText from "./EventText";
-
 import Choice from './Choice';
-
-import * as images from './assets/images';
+import EventText from "./EventText";
+import Shader from './Shader';
 
 export class Settings {
 	static speed = 1;
@@ -244,6 +240,11 @@ export default class GameScene extends Phaser.Scene {
 					.map(({ value }) => value).join('').trim();
 				const options = compiledPassage.filter(({ name }) => name === 'action');
 				canSkip = true;
+				window.a11y.update(
+					this.activePortrait.texture.key,
+					text,
+					options.map(({ value: { text } }, idx) => ({ label: text, action: () => choices[idx].emit('click')}))
+				);
 				await this.eventText.setText(text);
 				canSkip = false;
 				let yOffset = 0;

@@ -1,17 +1,14 @@
+import fontXml from '!!file-loader!./assets/font/font.fnt';
 import Phaser from 'phaser';
-
-import story from './assets/story';
-import fragShader from './assets/shader.frag.glsl';
-import music from './assets/song_v2.ogg';
+import fontImg from './assets/font/font.png';
+import * as images from './assets/images';
+import sfxLong from './assets/sfx_long.ogg';
 import sfxShort1 from './assets/sfx_short_1.ogg';
 import sfxShort2 from './assets/sfx_short_2.ogg';
 import sfxShort3 from './assets/sfx_short_3.ogg';
-import sfxLong from './assets/sfx_long.ogg';
-
-import fontImg from './assets/font/font.png';
-import fontXml from '!!file-loader!./assets/font/font.fnt';
-
-import * as images from './assets/images';
+import fragShader from './assets/shader.frag.glsl';
+import music from './assets/song_v2.ogg';
+import story from './assets/story';
 
 export default class LoadingScene extends Phaser.Scene {
 	constructor() {
@@ -40,6 +37,7 @@ export default class LoadingScene extends Phaser.Scene {
 
 		const progressbar = this.add.graphics();
 		const updateProgressbar = percent => {
+			window.a11y.progress(percent);
 			progressbar.clear();
 			progressbar.fillStyle(0xffffff, 1);
 			progressbar.fillRect(x, y, percent * width, height);
@@ -58,6 +56,7 @@ export default class LoadingScene extends Phaser.Scene {
 		this.load.on('progress', updateProgressbar);
 		this.load.once('complete', () => {
 			import('./GameScene').then(scene => {
+				window.a11y.loaded();
 				console.log(scene.default);
 				this.scene.add('game', new scene.default(), true);
 				this.scene.remove(this.key);

@@ -1,6 +1,5 @@
-import Phaser from "phaser";
 import 'babel-polyfill';
-
+import Phaser from "phaser";
 import LoadingScene from "./LoadingScene";
 
 const config = {
