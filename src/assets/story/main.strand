@@ -68,9 +68,9 @@ ROUND TABLE
 ::Options
 <<do this.scene.eventText.setFontSize(this.scene.eventText.fontData.size)>>
 <<do this.image('settings')>>
-Text speed: <<print ['SLOW','NORMAL','FAST','INSTANT'][this.speed()]>>
+Text animation speed: <<print ['SLOW','NORMAL','FAST','INSTANT'][this.speed()]>>
 
-This text will refresh when the settings change to demonstrate the new speed.
+This text will refresh when the settings change to demonstrate the new text animation speed.
 
 <<if this.speed() < 3>>[[Speed up text|this.speed(+1);this.goto('Options')]]<<endif>>
 <<if this.speed() > 0>>[[Slow down text|this.speed(-1);this.goto('Options')]]<<endif>>
