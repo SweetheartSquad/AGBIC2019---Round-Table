@@ -96,8 +96,8 @@ The Good Queen has passed, as all must. The burden to rule falls now to The Naï
 
 To You, and your advisors.
 
-[[Continue|this.allowSkip=true;this.goto('intro')]]
-<<if this.allowSkip>>[[Skip intro|this.goto('week-mid')]]<<endif>>
+[[Continue|this.allowSkip=true;this.flag('skipping', false);this.goto('intro')]]
+<<if this.allowSkip>>[[Skip intro|this.flag('skipping', true);this.goto('week-mid')]]<<endif>>
 
 ::intro
 It happened so suddenly. "Cut down in her prime", they'll say, looking back on it.
@@ -1025,7 +1025,7 @@ What do you do?
 
 ::week-end
 <<do this.setRandomScene()>>
-<<if this.flag('week') == 1>>
+<<if this.flag('week') == 1 && !this.flag('skipping')>>
 <<do this.image('scholar')>>
 The Wounded Scholar approaches you the next morning.
 
