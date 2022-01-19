@@ -22,3 +22,8 @@ jobs:
           ITCH_GAME: round-table
           ITCH_USER: sweetheartsquad
           PACKAGE: dist
+      - uses: Ilshidur/action-discord@0.3.2
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: 'deployed <https://sweetheartsquad.itch.io/round-table>'
