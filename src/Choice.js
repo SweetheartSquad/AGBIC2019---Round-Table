@@ -1,21 +1,21 @@
-import Phaser from "phaser";
-import { wrap } from "./utils";
+import Phaser from 'phaser';
+import { wrap } from './utils';
 
 export class Choice extends Phaser.GameObjects.DynamicBitmapText {
 	constructor(scene, text) {
 		super(scene, 0, 0, 'font', '', undefined, 0);
 		this.start = Date.now();
 		let down = false;
-		const cNormal = 0xFFFFFF;
-		const cOver = 0xBBBBFF;
-		const cActive = 0xBB3300;
+		const cNormal = 0xffffff;
+		const cOver = 0xbbbbff;
+		const cActive = 0xbb3300;
 		scene.add.existing(this);
 		this.setInteractive({
 			useHandCursor: true,
 		});
 		this.on('pointerover', () => {
 			this.tint = down ? cActive : cOver;
-			scene.sound.play(`sfxShort${Math.floor(Math.random()*3)+1}`);
+			scene.sound.play(`sfxShort${Math.floor(Math.random() * 3) + 1}`);
 		});
 		this.on('pointerout', () => {
 			this.tint = undefined;

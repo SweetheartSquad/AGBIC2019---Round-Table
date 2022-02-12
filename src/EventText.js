@@ -1,5 +1,5 @@
-import Phaser from "phaser";
-import { wrap, characterCallback, getTextAnimationLength } from "./utils";
+import Phaser from 'phaser';
+import { wrap, characterCallback, getTextAnimationLength } from './utils';
 
 export class EventText extends Phaser.GameObjects.DynamicBitmapText {
 	constructor(scene) {
@@ -13,8 +13,8 @@ export class EventText extends Phaser.GameObjects.DynamicBitmapText {
 	setText(text) {
 		this.start = Date.now();
 		super.setText(wrap(text, 27));
-		return new Promise(resolve => {
-			const timeout = setTimeout(resolve, getTextAnimationLength(this.text))
+		return new Promise((resolve) => {
+			const timeout = setTimeout(resolve, getTextAnimationLength(this.text));
 			this.finish = () => {
 				this.start = -Infinity;
 				clearTimeout(timeout);

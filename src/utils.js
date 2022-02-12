@@ -1,37 +1,34 @@
-import { Settings } from "./GameScene";
+import { Settings } from './GameScene';
 
 const cols = [
-	0xFFFFFF,
-	0xEEEEEE,
-	0xDDDDDD,
-	0xCCCCCC,
-	0xBBBBBB,
-	0xAAAAAA,
-	0x999999,
-	0x888888,
-	0x777777,
-	0x666666,
-	0x555555,
-	0x444444,
-	0x333333,
-	0x222222,
-	0x111111,
-	0x000000,
+	0xffffff, 0xeeeeee, 0xdddddd, 0xcccccc, 0xbbbbbb, 0xaaaaaa, 0x999999,
+	0x888888, 0x777777, 0x666666, 0x555555, 0x444444, 0x333333, 0x222222,
+	0x111111, 0x000000,
 ];
 
-const speeds = [
-	1200,
-	800,
-	400,
-	0,
-];
+const speeds = [1200, 800, 400, 0];
 
 const offset = 0.92;
 export function characterCallback(data) {
-	const t = 1.0 - Math.min(1, Math.max(0, (Date.now() - (data.parent.start + data.index * speeds[Settings.speed] * (1.0 - offset))) / speeds[Settings.speed]));
+	const t =
+		1.0 -
+		Math.min(
+			1,
+			Math.max(
+				0,
+				(Date.now() -
+					(data.parent.start +
+						data.index * speeds[Settings.speed] * (1.0 - offset))) /
+					speeds[Settings.speed]
+			)
+		);
 	data.rotation = -t * t * 0.8;
 	data.y += t * data.parent.fontData.size;
-	data.tint.topLeft = data.tint.topRight = data.tint.bottomLeft = data.tint.bottomRight = (cols[Math.floor(t * (cols.length - 1))]);
+	data.tint.topLeft =
+		data.tint.topRight =
+		data.tint.bottomLeft =
+		data.tint.bottomRight =
+			cols[Math.floor(t * (cols.length - 1))];
 	return data;
 }
 

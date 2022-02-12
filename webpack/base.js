@@ -1,24 +1,25 @@
-const webpack = require("webpack");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const package = require("../package.json");
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const package = require('../package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-	mode: "development",
-	devtool: "eval-source-map",
+	mode: 'development',
+	devtool: 'eval-source-map',
 	module: {
-		rules: [{
+		rules: [
+			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: {
-					loader: "babel-loader"
-				}
+					loader: 'babel-loader',
+				},
 			},
 			{
 				test: /\.(strand|glsl|vert|frag|gif|png|jpe?g|svg|xml|ogg)$/i,
-				use: "file-loader"
+				use: 'file-loader',
 			},
 			{
 				test: /\.css$/, // stylesheets
@@ -28,23 +29,20 @@ module.exports = {
 					{
 						loader: 'postcss-loader',
 						options: {
-							plugins: [
-								require('autoprefixer')(),
-								require('postcss-clean')()
-							]
-						}
-					}
-				]
-			}
-		]
+							plugins: [require('autoprefixer')(), require('postcss-clean')()],
+						},
+					},
+				],
+			},
+		],
 	},
 	plugins: [
-		new CleanWebpackPlugin(["dist"], {
-			root: path.resolve(__dirname, "../")
+		new CleanWebpackPlugin(['dist'], {
+			root: path.resolve(__dirname, '../'),
 		}),
 		new webpack.DefinePlugin({
 			CANVAS_RENDERER: JSON.stringify(true),
-			WEBGL_RENDERER: JSON.stringify(true)
+			WEBGL_RENDERER: JSON.stringify(true),
 		}),
 		new MiniCssExtractPlugin(),
 		new HtmlWebpackPlugin({
@@ -59,6 +57,6 @@ module.exports = {
 					css: './src/assets/style.css',
 				},
 			},
-		})
-	]
+		}),
+	],
 };

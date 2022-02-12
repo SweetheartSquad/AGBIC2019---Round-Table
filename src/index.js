@@ -6,7 +6,6 @@ loadEl.className = 'loading';
 loadEl.textContent = 'loading';
 document.body.appendChild(loadEl);
 
-
 window.a11y = {
 	init() {
 		this.el = document.createElement('main');
@@ -16,7 +15,8 @@ window.a11y = {
 		this.elText = document.createElement('div');
 		this.elOptions = document.createElement('ol');
 		this.elOptionsDescription = document.createElement('p');
-		this.elOptionsDescription.textContent = 'Press the number key of your option to continue';
+		this.elOptionsDescription.textContent =
+			'Press the number key of your option to continue';
 		this.el.style.position = 'absolute';
 		this.el.style.top = 0;
 		this.el.style.left = 0;
@@ -50,11 +50,15 @@ window.a11y = {
 	},
 	text(str, options) {
 		this.elText.innerHTML = '';
-		str.split('\n').map(i => this.sanitize(i)).filter(i => i).forEach(i => {
-			const p = document.createElement('p');
-			p.textContent = i;
-			this.elText.appendChild(p);
-		});
+		str
+			.split('\n')
+			.map((i) => this.sanitize(i))
+			.filter((i) => i)
+			.forEach((i) => {
+				const p = document.createElement('p');
+				p.textContent = i;
+				this.elText.appendChild(p);
+			});
 		if (options) {
 			options.forEach((i, idx) => {
 				const p = document.createElement('p');
@@ -68,14 +72,20 @@ window.a11y = {
 			return '';
 		}
 		this.elImg.dataset.key = str;
-		const img = (this.imageSeen[str] ? imagesDescriptions[str] : imagesDescriptions[`${str}First`]) || imagesDescriptions[str] || '';
+		const img =
+			(this.imageSeen[str]
+				? imagesDescriptions[str]
+				: imagesDescriptions[`${str}First`]) ||
+			imagesDescriptions[str] ||
+			'';
 		this.imageSeen[str] = true;
-		this.elImg.alt = imagesDescriptions[`${str}First`] || imagesDescriptions[str] || '';
+		this.elImg.alt =
+			imagesDescriptions[`${str}First`] || imagesDescriptions[str] || '';
 		return img;
 	},
 	options(options) {
 		this.elOptions.innerHTML = '';
-		options.forEach(i => {
+		options.forEach((i) => {
 			const li = document.createElement('li');
 			const btn = document.createElement('button');
 			li.appendChild(btn);
@@ -87,20 +97,29 @@ window.a11y = {
 	update(image, text, options) {
 		this.busy();
 		const img = this.img(image);
-		this.text(`${img}\n${text}\n${options.map((i, idx) => `${idx + 1}: ${this.sanitize(i.label)}.`).join('\n')}`);
+		this.text(
+			`${img}\n${text}\n${options
+				.map((i, idx) => `${idx + 1}: ${this.sanitize(i.label)}.`)
+				.join('\n')}`
+		);
 		this.options(options);
 		this.ready();
 	},
 	busy() {
 		this.elText.ariaBusy = true;
 	},
-	ready(){
+	ready() {
 		this.elText.ariaBusy = false;
 	},
 	sanitize(str) {
-		return str.replaceAll('\u0000','').replace(/\s+/g, ' ').trim().replace(/\[\+(WINE|BREAD|SALT)\]/g, 'Plus $1.').replace(/\[-(WINE|BREAD|SALT)\]/g, 'Minus $1.');
-	}
-}
+		return str
+			.replaceAll('\u0000', '')
+			.replace(/\s+/g, ' ')
+			.trim()
+			.replace(/\[\+(WINE|BREAD|SALT)\]/g, 'Plus $1.')
+			.replace(/\[-(WINE|BREAD|SALT)\]/g, 'Minus $1.');
+	},
+};
 
 window.a11y.init();
 setTimeout(() => {

@@ -19,7 +19,7 @@ export class LoadingScene extends Phaser.Scene {
 
 	preload() {
 		const borderOffset = 2;
-		const width = this.scale.width * 0.5;;
+		const width = this.scale.width * 0.5;
 		const height = 10;
 		const x = this.scale.width * 0.25;
 		const y = this.scale.height * 0.5 - height / 2;
@@ -27,17 +27,18 @@ export class LoadingScene extends Phaser.Scene {
 			lineStyle: {
 				width: borderOffset,
 				color: 0xffffff,
-			}
+			},
 		});
 		const borderRect = new Phaser.Geom.Rectangle(
 			x - borderOffset,
 			y - borderOffset,
 			width + borderOffset * 2,
-			height + borderOffset * 2);
+			height + borderOffset * 2
+		);
 		border.strokeRectShape(borderRect);
 
 		const progressbar = this.add.graphics();
-		const updateProgressbar = percent => {
+		const updateProgressbar = (percent) => {
 			window.a11y.progress(percent);
 			progressbar.clear();
 			progressbar.fillStyle(0xffffff, 1);
@@ -52,15 +53,21 @@ export class LoadingScene extends Phaser.Scene {
 		this.load.audio('sfxShort2', [sfxShort2]);
 		this.load.audio('sfxShort3', [sfxShort3]);
 		this.load.audio('sfxLong', [sfxLong]);
-		Object.entries(images).forEach(([key, value]) => this.load.image(key, value));
+		Object.entries(images).forEach(([key, value]) =>
+			this.load.image(key, value)
+		);
 
 		this.load.on('progress', updateProgressbar);
-		this.load.once('complete', () => {
-			import('./GameScene').then(({ GameScene }) => {
-				window.a11y.loaded();
-				this.scene.add('game', new GameScene(), true);
-				this.scene.remove(this.key);
-			});
-		}, this);
+		this.load.once(
+			'complete',
+			() => {
+				import('./GameScene').then(({ GameScene }) => {
+					window.a11y.loaded();
+					this.scene.add('game', new GameScene(), true);
+					this.scene.remove(this.key);
+				});
+			},
+			this
+		);
 	}
 }
