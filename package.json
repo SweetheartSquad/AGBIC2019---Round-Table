@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "agbic2019-round-table",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "ROUND TABLE",
 	"main": "src/index.js",
 	"repository": {
