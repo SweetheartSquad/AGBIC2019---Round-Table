@@ -98,7 +98,7 @@ window.a11y = {
 		this.elText.ariaBusy = false;
 	},
 	sanitize(str) {
-		return str.replaceAll('\u0000','').replace(/\s+/g, ' ').trim().replace(/\[\+(WINE|BREAD|SALT)\]/g, 'Plus $1.').replace(/\[\-(WINE|BREAD|SALT)\]/g, 'Minus $1.');
+		return str.replaceAll('\u0000','').replace(/\s+/g, ' ').trim().replace(/\[\+(WINE|BREAD|SALT)\]/g, 'Plus $1.').replace(/\[-(WINE|BREAD|SALT)\]/g, 'Minus $1.');
 	}
 }
 
