@@ -1,7 +1,8 @@
 const merge = require('webpack-merge');
 const path = require('path');
-const base = require('./base');
 const TerserPlugin = require('terser-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const base = require('./base');
 
 module.exports = merge(base, {
 	mode: 'production',
@@ -24,4 +25,9 @@ module.exports = merge(base, {
 			}),
 		],
 	},
+	plugins: [
+		new CleanWebpackPlugin(['dist'], {
+			root: path.resolve(__dirname, '../'),
+		}),
+	],
 });
