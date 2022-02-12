@@ -217,19 +217,12 @@ export class GameScene extends Phaser.Scene {
 		this.input.keyboard.addKey('SPACE').on('down', skip);
 		this.input.keyboard.addKey('ENTER').on('down', skip);
 		const choices = [];
-		const keyObj = this.input.keyboard.on('keydown', event => {
+		this.input.keyboard.on('keydown', event => {
 			if (choices[event.key - 1]) {
 				choices[event.key - 1].emit('click');
 			} else if (parseInt(event.key, 10) <= 4) {
 				skip();
 			}
-		});
-		keyObj.on('down', () => {
-			scene -= 1;
-			if (scene < 0) {
-				scene += scenes.length;
-			}
-			this.activePortrait.setTexture(scenes[scene]);
 		});
 		const renderer = {
 			displayPassage: async passage => {
