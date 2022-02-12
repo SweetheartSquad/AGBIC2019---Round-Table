@@ -228,7 +228,7 @@ export class GameScene extends Phaser.Scene {
 			displayPassage: async passage => {
 				choices.forEach(choice => choice.destroy());
 				choices.length = 0;
-				const compiledPassage = strand.execute(passage.program);
+				const compiledPassage = this.strand.execute(passage.program);
 				const text = compiledPassage
 					.filter(({ name }) => name === 'text')
 					.map(({ value }) => value).join('').trim();
@@ -248,7 +248,7 @@ export class GameScene extends Phaser.Scene {
 					c.setPosition(0, yOffset);
 					yOffset += c.height;
 					c.on('click', () => {
-						strand.eval(action);
+						this.strand.eval(action);
 						this.sound.play('sfxLong', {
 							detune: Math.random()*200 + 100,
 						});
