@@ -1,20 +1,21 @@
 {
+	"private": true,
 	"name": "agbic2019-round-table",
 	"version": "1.1.0",
 	"description": "ROUND TABLE",
 	"main": "src/index.js",
-	"scripts": {
-		"build": "webpack --config webpack/prod.js ",
-		"lint": "eslint \"./src/**/*.js\"",
-		"start": "webpack-dev-server --config webpack/base.js --open",
-		"optimize-images": "node optimize-images.js"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SweetHeartSquad/agbic2019-round-table.git"
 	},
 	"author": "SweetHeart Squad",
 	"license": "MIT",
+	"scripts": {
+		"build": "webpack --config webpack/prod.js ",
+		"lint": "eslint \"./src/**/*.js\"",
+		"start": "webpack-dev-server --config webpack/base.js --open",
+		"optimize-images": "node optimize-images.js"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
 		"@babel/eslint-parser": "^7.17.0",
