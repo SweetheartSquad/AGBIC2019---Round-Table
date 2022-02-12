@@ -224,7 +224,7 @@ export class GameScene extends Phaser.Scene {
 				skip();
 			}
 		});
-		keyObj.on('down', (event) => {
+		keyObj.on('down', () => {
 			scene -= 1;
 			if (scene < 0) {
 				scene += scenes.length;
