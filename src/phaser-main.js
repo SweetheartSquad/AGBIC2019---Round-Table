@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import Phaser from "phaser";
-import LoadingScene from "./LoadingScene";
+import { LoadingScene } from "./LoadingScene";
 
 const config = {
 	type: Phaser.AUTO,

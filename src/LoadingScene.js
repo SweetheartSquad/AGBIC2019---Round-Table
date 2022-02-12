@@ -8,9 +8,9 @@ import sfxShort2 from './assets/sfx_short_2.ogg';
 import sfxShort3 from './assets/sfx_short_3.ogg';
 import fragShader from './assets/shader.frag.glsl';
 import music from './assets/song_v2.ogg';
-import story from './assets/story';
+import { story } from './assets/story';
 
-export default class LoadingScene extends Phaser.Scene {
+export class LoadingScene extends Phaser.Scene {
 	constructor() {
 		super({ key: 'loading' });
 		window.game.canvas.ariaHidden = true;
@@ -55,9 +55,9 @@ export default class LoadingScene extends Phaser.Scene {
 
 		this.load.on('progress', updateProgressbar);
 		this.load.once('complete', () => {
-			import('./GameScene').then(scene => {
+			import('./GameScene').then(({ GameScene }) => {
 				window.a11y.loaded();
-				this.scene.add('game', new scene.default(), true);
+				this.scene.add('game', new GameScene(), true);
 				this.scene.remove(this.key);
 			});
 		}, this);

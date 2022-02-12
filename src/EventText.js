@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { wrap, characterCallback, getTextAnimationLength } from "./utils";
 
-export default class EventText extends Phaser.GameObjects.DynamicBitmapText {
+export class EventText extends Phaser.GameObjects.DynamicBitmapText {
 	constructor(scene) {
 		super(scene, 35, 35, 'font', '', undefined, 0);
 		this.start = Date.now();

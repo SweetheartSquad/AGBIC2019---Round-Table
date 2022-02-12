@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class Shader extends Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline {
+export class Shader extends Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline {
 	constructor(game) {
 		super({
 			game,

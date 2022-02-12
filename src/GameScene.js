@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 import Strand from 'strand-core';
-import Choice from './Choice';
-import EventText from "./EventText";
-import Shader from './Shader';
+import { Choice } from './Choice';
+import { EventText } from "./EventText";
+import { Shader } from './Shader';
 
 export class Settings {
 	static speed = 1;
@@ -137,7 +137,7 @@ class StrandE extends Strand {
 }
 
 
-export default class GameScene extends Phaser.Scene {
+export class GameScene extends Phaser.Scene {
 	constructor() {
 		super({ key: 'game' });
 	}

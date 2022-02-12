@@ -1,3 +1,1 @@
-import main from './main.strand';
-
-export default main;
+export { default as story } from './main.strand';
