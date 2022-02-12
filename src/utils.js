@@ -40,10 +40,10 @@ export function getTextAnimationLength(text) {
 }
 
 export function wrap(str, max) {
-	var words = str.split(/(\s)/);
-	var s = '';
-	var rows = [];
-	for (var i = 0; i < words.length; ++i) {
+	const words = str.split(/(\s)/);
+	let s = '';
+	const rows = [];
+	for (let i = 0; i < words.length; ++i) {
 		if (s.length + words[i].trim().length > max || words[i] === '\n') {
 			rows.push(s);
 			s = '';

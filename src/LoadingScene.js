@@ -1,5 +1,5 @@
-import fontXml from '!!file-loader!./assets/font/font.fnt';
 import Phaser from 'phaser';
+import fontXml from '!!file-loader!./assets/font/font.fnt';
 import fontImg from './assets/font/font.png';
 import * as images from './assets/images';
 import sfxLong from './assets/sfx_long.ogg';

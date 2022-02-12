@@ -179,9 +179,9 @@ export class GameScene extends Phaser.Scene {
 		this.eventText = new EventText(this);
 		this.frame = this.add.image(this.scale.width / 2, this.scale.height / 2, "frame");
 
-		var texture = this.textures.createCanvas('gradient', this.scale.width * 2, this.scale.height);
-		var context = texture.getContext();
-		var grd = context.createLinearGradient(0, 0, this.scale.width * 2, 0);
+		const texture = this.textures.createCanvas('gradient', this.scale.width * 2, this.scale.height);
+		const context = texture.getContext();
+		const grd = context.createLinearGradient(0, 0, this.scale.width * 2, 0);
 
 		grd.addColorStop(0, 'rgb(0,0,0)');
 		grd.addColorStop(0.5, 'rgb(0,0,0)');
@@ -215,7 +215,7 @@ export class GameScene extends Phaser.Scene {
 		this.input.on('pointerup', skip);
 		this.input.keyboard.addKey('SPACE').on('down', skip);
 		this.input.keyboard.addKey('ENTER').on('down', skip);
-		var keyObj = this.input.keyboard.on('keydown', event => {
+		const keyObj = this.input.keyboard.on('keydown', event => {
 			if (choices[event.key - 1]) {
 				choices[event.key - 1].emit('click');
 			} else if (parseInt(event.key, 10) <= 4) {
@@ -249,7 +249,7 @@ export class GameScene extends Phaser.Scene {
 				canSkip = false;
 				let yOffset = 0;
 				choices.push(...options.map(({ value: { text, action } }, idx) => {
-					var c = new Choice(this, `${idx + 1}.${text}`);
+					const c = new Choice(this, `${idx + 1}.${text}`);
 					this.choicesContainer.add(c);
 					c.setPosition(0, yOffset);
 					yOffset += c.height;
@@ -276,9 +276,7 @@ export class GameScene extends Phaser.Scene {
 			scene: this,
 			renderer,
 			source: this.cache.text.get('story')
-				.replace(/<<BR(.*?)>>/ig, function(_, text, pos) {
-					return `[[${text.trim() || 'Continue'}|this.goto('break:${pos}')]]\n::break:${pos}`;
-				})
+				.replace(/<<BR(.*?)>>/ig, (_, text, pos) => `[[${text.trim() || 'Continue'}|this.goto('break:${pos}')]]\n::break:${pos}`)
 				.replace(/\[\+SALT\]/g, '[+SALT]<<do this.plus("salt")>>')
 				.replace(/\[\+WINE\]/g, '[+WINE]<<do this.plus("wine")>>')
 				.replace(/\[\+BREAD\]/g, '[+BREAD]<<do this.plus("bread")>>')
