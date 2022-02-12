@@ -237,13 +237,13 @@ export class GameScene extends Phaser.Scene {
 				window.a11y.update(
 					this.activePortrait.texture.key,
 					text,
-					options.map(({ value: { text } }, idx) => ({ label: text, action: () => choices[idx].emit('click')}))
+					options.map(({ value: { text: label } }, idx) => ({ label, action: () => choices[idx].emit('click')}))
 				);
 				await this.eventText.setText(text);
 				canSkip = false;
 				let yOffset = 0;
-				choices.push(...options.map(({ value: { text, action } }, idx) => {
-					const c = new Choice(this, `${idx + 1}.${text}`);
+				choices.push(...options.map(({ value: { text: label, action } }, idx) => {
+					const c = new Choice(this, `${idx + 1}.${label}`);
 					this.choicesContainer.add(c);
 					c.setPosition(0, yOffset);
 					yOffset += c.height;
