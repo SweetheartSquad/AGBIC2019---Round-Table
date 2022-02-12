@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/extensions, import/no-unresolved
 import fontXml from '!!file-loader!./assets/font/font.fnt';
 import fontImg from './assets/font/font.png';
 import * as images from './assets/images';
