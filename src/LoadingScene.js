@@ -57,7 +57,6 @@ export default class LoadingScene extends Phaser.Scene {
 		this.load.once('complete', () => {
 			import('./GameScene').then(scene => {
 				window.a11y.loaded();
-				console.log(scene.default);
 				this.scene.add('game', new scene.default(), true);
 				this.scene.remove(this.key);
 			});
