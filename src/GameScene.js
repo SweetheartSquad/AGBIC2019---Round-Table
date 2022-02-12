@@ -44,9 +44,10 @@ class StrandE extends Strand {
 	flag(flag, value) {
 		if (value !== undefined) {
 			flags[flag] = value;
-		} else {
-			return flags[flag];
-		}
+			return undefined;
+		} 
+		return flags[flag];
+		
 	}
 
 	reset() {
