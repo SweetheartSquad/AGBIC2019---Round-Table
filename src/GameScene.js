@@ -216,6 +216,7 @@ export class GameScene extends Phaser.Scene {
 		this.input.on('pointerup', skip);
 		this.input.keyboard.addKey('SPACE').on('down', skip);
 		this.input.keyboard.addKey('ENTER').on('down', skip);
+		const choices = [];
 		const keyObj = this.input.keyboard.on('keydown', event => {
 			if (choices[event.key - 1]) {
 				choices[event.key - 1].emit('click');
@@ -230,7 +231,6 @@ export class GameScene extends Phaser.Scene {
 			}
 			this.activePortrait.setTexture(scenes[scene]);
 		});
-		const choices = [];
 		const renderer = {
 			displayPassage: async passage => {
 				choices.forEach(choice => choice.destroy());
